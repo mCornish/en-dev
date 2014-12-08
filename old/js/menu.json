@@ -1,0 +1,44 @@
+[
+	{
+		"heading": "Getting Started",
+		"items":
+		[
+			{ "name": "Introduction", "template": "docs/start/intro.html"},
+			{ "name": "Sandbox", "template": "docs/start/sandbox.html"},
+			{ "name": "Hello World", "template": "docs/start/helloworld.html"}
+		]
+	},
+	{
+		"heading": "Authentication",
+		"items":
+		[
+			{ "name": "Introduction", "template": "docs/auth/intro.html"},
+			{ "name": "AuthenticateByDeviceToken", "template": "docs/auth/AuthenticateByDeviceToken.html"},
+			{ "name": "GetDeviceCode", "template": "docs/auth/GetDeviceCode.html"},
+			{ "name": "GetDeviceToken", "template": "docs/auth/GetDeviceToken.html"}
+		]
+	},
+	{
+		"heading": "References",
+		"items":
+		[
+			{ "name": "Introduction", "template": "docs/ref/intro.html"},
+			{ "name": "CreateGroup", "template": "docs/ref/CreateGroup.html"},
+			{ "name": "GetGroup", "template": "docs/ref/refGetGroup.html"},
+			{ "name": "ListGroups", "template": "docs/ref/ListGroups.html"},
+			{ "name": "ListGroupSet", "template": "docs/ref/ListGroupSet.html"},
+			{ "name": "CreateReference", "template": "docs/ref/CreateReference.html"},
+			{ "name": "GetReferences", "template": "docs/ref/GetReferences.html"},
+			{ "name": "GetReferences", "template": "docs/ref/GetReferences.html"}
+		]
+	},
+	{
+		"heading": "Formatting",
+		"items":
+		[
+			{ "name": "Introduction", "template": "docs/format/intro.html"},
+			{ "name": "FormatManuscript", "template": "docs/format/FormatManuscript.html"},
+			{ "name": "FormatReference", "template": "docs/format/FormatReference.html"}
+		]
+	}
+]

@@ -1,0 +1,80 @@
+<div id="intro">
+	<header class="EN101">
+		<h1>EndNote Development 101</h1>
+		<div id="apiDiv">
+			<span class="apiLabel">Get an API Key</span><img class="apiArrow" src="img/arrow.png" />
+		</div>
+	</header>
+
+	<section>
+		<header>
+			<h2>Becoming an EndNote developer is as easy as <span class="count">1-2-3.</span></h2>
+		</header>
+
+		<ul id="steps">
+			<li data-anchor="#discover" ng-click="anchorScroll()"><span class="stepNum">1.</span>&nbsp;<span class="cta">Discover</span> how to leverage the EndNote API</li>
+			<li data-anchor="#register" ng-click="anchorScroll()"><span class="stepNum">2.</span>&nbsp;<span class="cta">Register</span> your application with the developer center</li>
+			<li data-anchor="#create" ng-click="anchorScroll()"><span class="stepNum">3.</span>&nbsp;<span class="cta">Create</span> applications with the most popular citation engine</li>
+		</ul>
+
+		<!-- <div id="apiFiller" class="college filler">API</div>
+		<div id="formattingFiller" class="denne filler">Formatting</div>
+		<div id="citationFiller" class="secondSketch filler">Citations</div> -->
+	</section>
+</div>
+<div id="discover" class="step">
+	<div class="left">
+		<img class="discoverIcon" />
+	</div>
+	<div class="right">
+		<header>
+			<h2>Discover</h2>
+		</header>
+		<section>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			</p>
+			<a class="cta" href="#">Discover the EndNote API <span>»<span></a>
+		</section>
+	</div>
+</div>
+<div id="register" class="step">
+	<div class="left">
+		<header>
+			<h2>Register</h2>
+		</header>
+		<section>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			</p>
+			<a class="cta" href="#">Register your application <span>»<span></a>
+		</section>
+	</div>
+	<div class="right">
+		<img class="registerIcon" />
+	</div>
+</div>
+<div id="create" class="step">
+		<header>
+			<h2>Create</h2>
+		</header>
+		<section>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
+			</p>
+			<div class="creations">
+				<img class="creation" src="" />
+				<img class="creation" src="" />
+				<img class="creation" src="" />
+				<img class="creation" src="" />
+			</div>
+			<a class="cta" href="#">More EndNote creations <span>»<span></a>
+		</section>
+	</div>
+</div>
+<script>
+	$('#steps li').on('click', function(){
+		var anchor = $(this).attr('data-anchor');
+		$('html,body').animate({scrollTop: $(anchor).offset().top},'easeInCirc');
+	})
+</script>

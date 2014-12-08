@@ -1,0 +1,27 @@
+<header role="banner" class="container-fluid">
+    <div class="header__alpha row">
+        <div class="col-xs-6">
+            <a href="#">
+                <div class="logo__alpha primary-color">THOMSON REUTERS</div>
+                <div class="logo__beta highlight-color">
+                    ENDNOTE<span class="logo__developer primary-color">Developer</span>
+                </div>
+            </a>
+        </div>
+        <input class="search form-control col-xs-6" type="search" placeholder="Search" ng-model="header.term" />
+    </div>
+    <div class="header__beta row">
+        <nav role="navigation" class="col-xs-10">
+            <ul class="nav header__nav">
+                <li ng-repeat="section in header.map">
+                    <a ng-class="{active: header.isActive('{{section.name}}')}" ng-href="#/{{section.name}}">{{section.name}}</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="col-xs-2">
+            <button href="#" id="key-btn" class="header__key-btn secondary-color btn" ng-click="toggle.state = !toggle.state" ng-class="{'active' : toggle.state}">Get an API Key</button>
+        </div>
+    </div>
+    <x-api-panel></x-api-panel>
+    <x-results></x-results>
+</header>

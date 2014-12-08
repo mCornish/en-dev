@@ -1,0 +1,186 @@
+/*START FONTS*/
+
+
+
+.denne {
+	font-family: "denne";
+}
+
+.milkTea {
+	font-family: "milkTea";
+}
+
+.sandwichPaper {
+	font-family: "sandwichPaper";
+}
+
+.secondSketch {
+	font-family: "secondChanceSketch";
+}
+
+.secondSolid {
+	font-family: "secondChanceSolid";
+}
+
+.college {
+	font-family: "sketchCollege";
+}
+
+/*END FONTS*/
+
+.view {
+	margin-top: 75px;
+}
+
+.mainView {
+	margin-top: 130px;
+	text-align: center;
+}
+
+.mainView ul {
+	list-style: none;
+	margin-top: 50px;
+}
+
+.mainView li .secondSketch {
+	font-size: 0.9em;
+}
+
+/*START FOOTER*/
+
+
+#buyEndNote {
+	display: none;
+	bottom: 100px;
+	font-size: 3.3em;
+	-webkit-transform: rotate(-20deg);
+	transform: rotate(-20deg);
+}
+
+/*END FOOTER*/
+
+/*START COLORS*/
+#menuColumn .header,
+.orange {
+	color: #ff9100 !important;
+}
+
+.blue {
+	color: #55d5e1 !important;
+}
+
+.white {
+	color: #fff !important;
+}
+
+.green {
+	color: #00dd00 !important;
+}
+
+.yellow {
+	color: #ffff00 !important;
+}
+/*END COLORS*/
+
+
+/*Start API Menu*/
+#menuColumn {
+	padding-bottom: 10px;
+
+}
+
+#menuColumn ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	padding-top: 10px;
+}
+
+#menuColumn ul > li {
+	text-align: right;
+	padding-right: 15px;
+	padding-bottom: 5px;
+}
+
+#menuColumn ul > li a {
+	font-family: "secondChanceSolid";
+	font-size: 1.15em;
+	color: #fff;
+}
+
+#menuColumn ul > li a:hover {
+	text-decoration: none;
+	color: #aaa;
+}
+
+#menuColumn .header
+ {
+	font-family: "milkTea";
+	font-size: 2em;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+/*End API Menu*/
+
+
+/*Start Partial*/
+.header {
+	font-size: 3.5em;
+	text-transform: lowercase;
+}
+
+#contentColumn p {
+	font-size: 1.2em;
+}
+/*End Partial*/
+
+
+/*Start Snippet Styling*/
+pre {
+	padding: 10px !important;
+	box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.3);
+	max-height: 150px;
+}
+
+pre code {
+	margin-bottom: 10px !important;
+	font-size: 1.1em;
+}
+
+pre[class*=language-]>code[data-language] {
+	display: inline;
+}
+/*End Snippet Styling*/
+
+
+/*Start Sandbox Styling*/
+#divSandbox {
+	height: 100%;
+	right: 0;
+	top: 0;
+	background: url('img/ao.gif');
+	position: fixed;
+	display: none;
+	z-index: 9999999;
+}
+
+#divSandbox .exit {
+	float: right;
+	margin-top: 5px;
+	font-size: 3.5em;
+	font-color: rgba(255,255,255,1) !important;
+}
+
+#divSandbox #include {
+	margin-top: 40px;
+}
+
+#divSandbox .exit:hover {
+	text-decoration: none;
+}
+
+#divSandbox .innerContents {
+	padding: 20px;
+	display: none;
+}
+/*End Sandbox Styling*/

@@ -1,0 +1,82 @@
+<h1>Synchronization API</h1>
+<p>
+The EndNote synchronization scheme is designed around a particular set of requirements:
+</p>
+<ol class="standard-list">
+    <li>
+        Synchronization follows a “client-server” model where the central service is the ultimate arbiter of the state of the account.
+    </li>
+    <li>
+        Clients are built using a variety of local storage mechanisms, so the synchronization scheme must not assume a particular low-level storage representation: data must be transferred at a “logical” level rather than a “block/record” level.
+    </li>
+    <li>
+        EndNote must support both full and incremental synchronization. It is not acceptable to send the entire DB with each sync.
+    </li>
+    <li>
+        Synchronization must be possible over unreliable networks without significant retransmission. Even for initial sync, clients must be able to resume transfer after a network error.
+    </li>
+    <li>
+        Synchronization cannot “lock” the EndNote service to make the process atomic/synchronous. The scheme must tolerate modifications from other clients during the synchronization process.
+    </li>
+</ol>
+<p>
+    EndNote Synchronization addresses these requirements using a “state based replication” scheme that treats the central service as a simple data store and pushes most decisions into the clients. This is intended to be similar to the model used by mail systems such as IMAP or MS Exchange, which have been able to address a similar set of requirements in a robust and scalable manner.
+</p>
+<p>
+    In this scheme, the EndNote service does not keep track of the current state of individual clients, and it does not keep a fine-grained transaction log to implement “log-based replication”. Instead, it stores a set of data elements (References, Groups, etc.) for each user. Each data element has an “Update Sequence Number” (USN) that identifies the order in which it was last modified in the account. The system can use these numbers to determine whether one object in the account was modified more recently than another.
+</p>
+<p>
+    The USNs within an account start at “1” (for the first object created in the account) and then increase monotonically every time an object is created, modified, or deleted. The server keeps track of the “update count” for each account, which is identical to the highest USN that has been assigned.
+</p>
+<p>
+    At any point, the service is capable of ordering the objects in the account using their USN values. To synchronize, a client must only receive the objects that were changed after the last client sync ... i.e. only objects that have a USN that is higher than the server’s “update count” at the last successful sync.
+</p>
+<p>
+    This goal is somewhat complicated by requirements #3-5, above. In order to meet these requirements, the protocol must allow the client to request small “blocks” of objects without locking the service during the sync. The protocol must handle the situation where the state of the service changes in the middle of a sequence of blocks being sent to the client ... either due to the size/speed of transmission, or due to a network interruption.
+</p>
+<p>
+    As mentioned above, the synchronization scheme pushes all of the record keeping and conflict resolution work onto the client so that the service can perform synchronization in a scalable “stateless” manner. This means that the client needs to keep track of the state of the server during each sync, and then use this information to send and receive updates on the next sync. At a high level, the client performs the following steps:
+</p>
+<ul class="standard-list">
+    <li>
+        Get the list of new/modified objects from the service (since the last sync)
+    </li>
+    <li>
+        Reconcile the server’s changes with the local database
+    </li>
+    <li>
+        Send the client’s unsynchronized updates to the service
+    </li>
+    <li>
+        Record the server’s state for the next sync
+    </li>
+</ul>
+<p>
+    In order to distinguish data that is in sync with the service from data that has been created/modified by the client since the last sync, the client must maintain an internal “dirty” flag on every modified object in the local store. This constitutes the list of objects that must be pushed to the service (after conflict resolution).
+</p>
+<p>
+    The client should make it possible for a user to perform a full synchronization even if the client is theoretically capable of an incremental sync. To accomplish this we have defined the following sync workflows.
+</p>
+<ul class="standard-list">
+    <li>
+        <strong>Incremental Sync:</strong> Evaluate items on the service that have changed since the last change processed on the client.
+    </li>
+    <li>
+        <strong>Full Sync:</strong> Evaluate all items on the service and the client starting with the oldest change purging items that are not listed in the client.
+    </li>
+    <li>
+        <strong>Recovery Sync:</strong> Evaluate all items on the service and client starting with the oldest change. For any items that are on the client that have a GUID, purge the GUID and add to the service as a new item.
+    </li>
+    <li>
+        <strong>Initial Sync:</strong> Purge all local GUIDs and USNs from the client.
+    </li>
+</ul>
+<p>
+    “Full”, “initial” and “recovery” sync are similar processes. For the simple case, during initial sync, everything on the service will be new to the client and everything on the client will be new to the service. The more complex case is the client library has been shared with different users or the client login is now against a different user in the service.
+</p>
+<p>
+    “Full sync” can also occur even when it’s not the initial sync. For example, if a client has not synchronized recently enough as specified by the service, then the client will start at USN=0 and reprocess everything making smart decisions along the way to only move the data needed and ensure everything is fully synchronized when complete. This is mostly to ensure the clients can become synchronized even if they have been offline for a long time and the service no longer has a record of expunged items.
+</p>
+<p>
+    The service will force a client to do a “recovery sync” if there was a serious problem on the server.
+</p>

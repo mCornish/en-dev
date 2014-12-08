@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html ng-app="enDev">
+<head>
+	<title>EndNote Developer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-route.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-animate.min.js"></script>
+
+	<link href="bento.ui/css/bento.ui-bootstrap.min.css" rel="stylesheet" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css" rel="stylesheet" >
+	<link href="style.css" rel="stylesheet" />
+	<link href="components.css" rel="stylesheet" />
+	<link href="chalk.css" rel="stylesheet" />
+	<link href="loading-animation.css" rel="stylesheet" />
+	<link href="media-queries.css" rel="stylesheet" />
+	<link href="fonts.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+	<div id=wrapper>
+		<header class="main" ng-controller="apiController">
+			<div class="headTop">
+				<a class="logo" href="#">
+					<div class="logoTop">THOMSON REUTERS</div>
+					<div class="logoBot">
+						ENDNOTE<span>Developer</span>
+					</div>
+				</a>
+				<input id="txtSearch" class="pull-right" type="text" placeholder="Search" />
+			</div>
+			<div class="headBot">
+				<nav>
+					<ul>
+						<li><a class="menuItem" href="#/reference/start/intro">API Reference</a></li>
+						<li><a class="menuItem" href>Usage</a></li>
+						<li><a class="menuItem" href>Resources</a></li>
+						<li><a class="menuItem" href>Status</a></li>
+						<li><a class="menuItem" href ng-click="showSandbox()">Sandbox</a></li>
+					</ul>
+				</nav>
+				<button href="#" id="btnGetKey" class="btn btn-primary pull-right">Get an API Key</button>
+			</div>
+		</header>
+		<section id="apiPanel">
+			<div class="confirmation">Submitted</div>
+			<div class="loader">
+				<div class="windows8">
+					<div class="wBall" id="wBall_1">
+						<div class="wInnerBall"></div>
+					</div>
+					<div class="wBall" id="wBall_2">
+						<div class="wInnerBall"></div>
+					</div>
+					<div class="wBall" id="wBall_3">
+						<div class="wInnerBall"></div>
+					</div>
+					<div class="wBall" id="wBall_4">
+						<div class="wInnerBall"></div>
+					</div>
+					<div class="wBall" id="wBall_5">
+						<div class="wInnerBall"></div>
+					</div>
+				</div>
+			</div>
+			<div class="panelContents">
+				<div class="stepWell no-border span5">
+					<span class="step-title"><img src="img/step1.png" />Developer Details</span><p></p>
+					<form>
+						 <label for="txtDevName">Developer's Name</label>
+						 <input type="text" id="txtDevName" placeholder="Your Name"/>
+
+					 	 <label for="txtInstitution">Institution</label>
+						 <input type="text" id="txtInstitution" placeholder="(University, Company, Organization)"/>
+
+						 <label for="txtEmail">Email</label>
+						 <input type="email" id="txtEmail" placeholder="Your Email"/>
+
+				 		 <label for="txtPhone">Phone</label>
+						 <input type="tel" id="txtPhone" placeholder="Your Phone Number"/>
+
+					</form>
+				</div>
+
+				<div class="stepWell no-border span5">
+					<span class="step-title"><img src="img/step2.png" />Project Details</span><p></p>
+					<form>
+						<label for="txtAppName">App Name</label>
+					 	<input type="text" id="txtAppName" placeholder="Application Name"/>
+
+					 	<label for="dropServices">Allowed Services</label>
+						<select class="form-control">
+							<option>Full Access</option>
+							<option>Read Only</option>
+							<option>Reference API</option>
+							<option>Formatter API</option>
+						</select>
+
+						 <label for="txtClientId">Client ID</label>
+						 <input type="text" id="txtClientId" placeholder="An ID Unique to You"/>
+
+				 		 <label for="txtWebsite">Website</label>
+						 <input type="tel" id="txtWebsite" placeholder="Website Hosting Your App"/>
+
+					</form>
+				</div>
+
+				<div class="stepWell no-border span3">
+					<span class="step-title"><img src="img/finished.png" style="width: 30px !important;"/>Submit!</span><p></p>
+					<div class="tos">
+							<input type="checkbox" />
+							<span>I accept the <a href="#">Terms of Service</a></span>
+					</div>
+						<a href="#" class="btn btn-primary btn-large btn-block submit">Submit</a>
+						<a href="#" class="btn btn-block"><small>Reset Form</small></a>
+				</div>
+			</div>
+		</section>
+		<main>
+			<div id="viewPort" ng-view></div>
+		</main>
+		<aside>
+			<div class="span5" id="divSandbox">
+				<div class="innerContents">
+					<a href class="denne white exit">X</a>
+					<div id="include" ng-include="'partials/sandbox.html'"></div>
+				</div>
+			</div>
+		</aside>
+
+		<footer>
+			<div id="top-wrap">
+				<div class="box">
+					<p>Purchase Support</p>
+					<ul>
+						<li><a href="/downloads/30-day-trial">Free Trial</a></li>
+						<li><a href="/buy">Purchase Options</a></li>
+						<li><a href="/buy/international">Regional Resellers</a></li>
+					</ul>
+			    <!-- <p><a class="app" target="_blank" href="https://itunes.apple.com/us/app/endnote-for-ipad/id593994211?mt=8&amp;elq=415a266a2b374ca1b03bc5c1d3109245">Available on the App Store</a></p> -->
+				</div>
+				<div class="box">
+					<p>Customer Support</p>
+					<ul>
+						<li><a href="/training">Training</a></li>
+						<li><a href="/training/guide/windows">Getting Started</a></li>
+						<li><a href="/support">Technical Support</a></li>
+						<li><a href="/support/international">International Support</a></li>
+						<li><a href="/downloads">Software Updates</a></li>
+					</ul>
+				</div>
+				<div class="box">
+					<p>Connect</p>
+			    <ul style="margin-bottom:10px">
+						<li><a href="/contact">Contact Us</a></li>
+						<li><a href="/community">User Community</a></li>
+					</ul>
+			    <!-- <ul class="social-icon">
+						<li>
+							<a href="http://feeds.feedburner.com/upcoming_endnote_webinars"><img src="img/rss_26x26.gif" width="26" alt="RSS"></a>
+							<a href="https://www.facebook.com/EndNote"><img src="img/facebook_26x26.gif" width="26" alt="Facebook"></a>
+							<a href="https://twitter.com/EndNoteNews"><img src="img/twitter-bird_26x26.gif" width="26" alt="Twitter"></a>
+							<a href="https://www.youtube.com/user/EndNoteTraining"><img src="img/youtube_26x26.gif" width="26" alt="Youtube"></a>
+						</li>
+					</ul>
+					<p>Newsletter</p>
+					<form name="SSR-201404-EndNote-Newsletter" method="post" id="SSR-201404-EndNote-Newsletter_footer" action="">
+						<input type="hidden" value="SSR-201404-EndNote-Newsletter" name="elqFormName">
+						<input type="hidden" value="1556" name="elqSiteID">
+						<input type="email" name="emailAddress" placeholder="Enter Email to Sign Up" value="" class="elqField" id="emailAddress">
+						<input type="submit" value="Submit" id="submit">
+					</form> -->
+				</div>
+				<div class="box">
+					<p>Legal</p>
+					<ul>
+						<li><a href="/license">License Agreement</a></li>
+						<li><a href="/support/ada-compliance">ADA Compliance</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="bottom-wrap">
+				<!-- <a class="footerLogo" href="http://thomsonreuters.com/"></a> -->
+				<span class="footerLogo2">THOMSON REUTERS</span>
+				<nav>
+					<ul>
+						<li>
+							© 2014 Thomson Reuters
+						</li>
+						<li>
+							<a rel="nofollow" href="http://ip-science.thomsonreuters.com/privacy/">Privacy Statement</a>
+						</li>
+						<li>
+							<a rel="nofollow" href="/terms/">Terms of Use</a>
+						</li>
+						<li>
+							<a rel="nofollow" href="http://thomsonreuters.com/copyright/">Copyright Information</a>
+						</li>
+						<li>
+							<a href="/sitemap/">Site Map</a>
+						</li>
+						<li>
+							<a rel="nofollow" href="http://careers.thomsonreuters.com/">Careers</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- <span id="apiStatus" class="milkTea white">All systems are&nbsp;<span class="green">operational</span></span> -->
+			</div>
+			<!-- <button href="#" id="btnGetKey2" class="btn btn-primary pull-right">Get an API Key</button>
+			<img id="searchIcon" src="img/magnifier.png" width="32" height="32" />
+			<input id="txtSearch2" class="pull-right" type="text" placeholder="Search" /> -->
+		</footer>
+	</div>
+
+	<script src="app.js"></script>
+	<script src="controllers.js"></script>
+</body>
+</html>

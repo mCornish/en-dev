@@ -1,0 +1,683 @@
+/* ------------------------------------------------------*/
+/* ------------------------------------------------------*/
+/* #GLOBAL
+/* ------------------------------------------------------*/
+/* ------------------------------------------------------*/
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background: #BABABA url('../images/body-bg.jpg') repeat-x;
+}
+
+header {
+    clear: both;
+}
+
+h1 {
+    font: 3rem 'knowledgeBold', Arial, Helvetica, sans-serif;
+    line-height: 1.48em;
+}
+
+h2 {
+    font: 2.5rem 'knowledgeLight', Arial, Helvetica, sans-serif;
+    line-height: 1.48em;
+}
+
+h3 {
+    font: 1.2rem 'knowledgeBold', Arial, Helvetica, sans-serif;
+    line-height: 1.48;
+}
+
+p {
+    font: 1rem Arial, Helvetica, sans-serif;
+
+    line-height: 1.48em;
+
+    margin-bottom: 1.1rem;
+}
+
+a, a:focus, a:hover {
+    text-decoration: none;
+}
+
+li {
+    line-height: 1.48em;
+}
+
+label {
+    font: 1.1rem 'knowledgeRegular';
+
+    text-transform: uppercase;
+
+    color: #FFF;
+}
+
+input, select {
+    font-family: 'knowledge';
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+
+
+
+
+/* ------------------------------------------------------*/
+/* ------------------------------------------------------*/
+/* #COMPONENTS
+/* ------------------------------------------------------*/
+/* ------------------------------------------------------*/
+
+/* -----------------------------------*/
+/* #NAV
+/* -----------------------------------*/
+
+.nav {
+    list-style: none;
+    margin-left: 0;
+}
+
+    .nav > li,
+        .nav > li > a {
+            display: inline-block;
+           *display: inline; /* IE7 hack */
+    }
+
+        .nav a {
+            text-transform: capitalize;
+        }
+
+.nav--vertical {
+
+}
+
+    .nav--vertical li {
+        display: block;
+    }
+
+
+
+
+
+/* -----------------------------------*/
+/* #CONTAINER
+/* -----------------------------------*/
+
+.container--padded {
+    padding: 3em;
+}
+
+
+
+
+
+/* -----------------------------------*/
+/* #TOGGLE
+/* -----------------------------------*/
+
+.toggle {
+    display: block;
+    cursor: pointer;
+}
+
+    .toggle::after {
+        content: '▼';
+        font-size: 0.8em;
+    }
+
+    .toggle--open::after {
+        content: '▲';
+    }
+
+
+
+
+
+/* -----------------------------------*/
+/* #STANDARD LIST
+/* -----------------------------------*/
+
+.standard-list {
+    padding-left: 3em;
+    margin-bottom: 1.1em;
+    font-family: Arial;
+}
+
+
+
+
+/* ------------------------------------------------------*/
+/* ------------------------------------------------------*/
+/* #VIEWS
+/* ------------------------------------------------------*/
+/* ------------------------------------------------------*/
+
+/* -----------------------------------*/
+/* #HEADER
+/* -----------------------------------*/
+
+header[role='banner'] {
+    position: relative;
+
+    width: 100%;
+
+    border-bottom: 2px solid #FF8000;
+}
+
+    .header__alpha {
+        padding: 20px 0;
+    }
+
+        .logo__alpha {
+            font: 1.2em 'knowledgeMedium';
+            display: inline-block;
+        }
+
+        .logo__beta {
+            font: 2.5em 'knowledgeMedium';
+
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+            .logo__developer {
+                font-family: 'knowledge-light';
+            }
+
+        .search {
+            position: absolute;
+            right: 0;
+
+            width: 25em;
+            margin-top: 15px;
+        }
+
+    .header__beta {
+        overflow: hidden;
+
+        height: 45px;
+
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+        .header__nav > li, .header_nav > li:hover {
+            border-bottom: 4px #FF8000 solid;
+        }
+
+            .header__nav a {
+                font: 24px 'knowledgeLight' bold; /* Uses pixels so it won't scale */
+
+                display: block;
+
+                padding: 9px .4em 9px;
+
+                transition: padding 0.2s;
+
+                color: currentColor;
+            }
+
+                .header__nav a:hover {
+                    padding: 9px .4em 4px;
+
+                    transition: padding 0.2s;
+                }
+
+                .header__nav .active {
+                    padding: 9px .4em 4px;
+
+                    color: #FF8000;
+                }
+
+        .header__key-btn {
+            font-family: 'knowledge';
+            position: absolute;
+            right: 0;
+
+            width: 8em;
+            margin: 7px 0;
+
+            border: none;
+            background: #FF8000;
+        }
+
+            .header__key-btn:hover, .header__key-btn:focus, .header__key-btn.active {
+                color: white;
+                border: none;
+                background: #E77707;
+            }
+
+
+
+
+
+/* -----------------------------------*/
+/* #API PANEL
+/* -----------------------------------*/
+
+.api-panel {
+    position: relative;
+    z-index: 1;
+
+    overflow: hidden;
+
+    height: 0;
+
+    transition: height 0.2s;
+
+    background: #FF8000;
+}
+
+    .api-panel.active {
+        height: 475px;
+
+        transition: height 0.2s;
+    }
+
+    .api-panel__container {
+        overflow: hidden;
+
+        margin: 0 auto;
+        padding: 28px;
+    }
+
+        .api-panel__section {
+            padding: 30px;
+
+            border: 0;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+            .api-panel__header {
+                text-align: center;
+            }
+
+            .api-panel__form {
+                margin-top: 20px;
+            }
+
+                .api-panel__input {
+                    margin-bottom: 15px;
+                }
+
+                    .api-panel__input:focus {
+                        background: #F0D9C0;
+                    }
+
+                .api-panel__terms {
+                    margin: 20px 0;
+                }
+
+                    .api-panel__terms-check {
+                        width: 25px;
+                    }
+
+                    .api-panel__terms-text {
+                        font: 1rem 'knowledge';
+                    }
+
+                    .api-panel__terms-link {
+                        text-decoration: underline;
+                    }
+
+                        .api-panel__terms-link:hover {
+                            text-decoration: underline;
+
+                            color: black;
+                        }
+
+                .api-panel__submit {
+                    font: 1rem 'knowledgeMedium';
+
+                    text-transform: uppercase;
+
+                    border: none;
+                    background: rgba(0, 0, 0, 0.2);
+                }
+
+                    .api-panel__submit:hover {
+                        background: rgba(0, 0, 0, 0.4);
+                    }
+    .loader {
+        display: none;
+
+        height: 100%;
+
+        text-align: center;
+    }
+
+    .api-panel__confirm {
+        font: 3em 'knowledgeMedium';
+
+        display: none;
+
+        width: 200px;
+        height: 13%;
+        margin: auto;
+        padding: 5em 0;
+
+        text-align: center;
+    }
+
+
+
+
+
+/* -----------------------------------*/
+/* #RESULTS PANEL
+/* -----------------------------------*/
+
+.search-results {
+    position: relative;
+    z-index: 1;
+
+    overflow: hidden;
+
+    height: 0;
+
+    transition: height 0.2s;
+
+    background: #FF8000;
+}
+
+    .search-results.active {
+        height: 475px;
+
+        transition: height 0.2s;
+    }
+
+
+
+
+
+/* -----------------------------------*/
+/* #HOMEPAGE
+/* -----------------------------------*/
+
+.intro {
+    background: url('../images/chalk.jpg');
+
+    -webkit-font-smoothing: antialiased;
+}
+
+    .intro__h1 {
+        font-family: 'secondChanceSketch';
+    }
+
+    .intro__api-cta {
+        position: relative;
+        top: -2.5em;
+    }
+
+        .intro__api-label {
+            font: 1.5em 'milkTea';
+
+            position: relative;
+            top: 1.7em;
+            right: 0.5em;
+        }
+
+        .intro__api-arrow {
+            width: 5em;
+        }
+
+    .intro__h2 {
+        font-family: 'milkTea';
+        font-weight: normal;
+
+        margin: 0 1em;
+    }
+
+        .intro__count {
+            font-family: 'secondChanceSketch';
+        }
+
+    .intro__steps {
+        font-family: 'milkTea';
+
+        margin: 0;
+        padding-left: 5em;
+    }
+
+        .intro__step {
+            font-size: 2rem;
+
+            display: inline-block;
+
+            margin-bottom: 0.2em;
+
+            cursor: pointer;
+        }
+
+            .intro__step-num {
+                font-family: 'secondChanceSketch';
+            }
+
+            .intro__cta {
+                position: relative;
+                top: 0;
+
+                transition: top, 0.3s;
+                text-decoration: none;
+            }
+
+                .intro__step:hover .intro__cta {
+                    top: -10px;
+
+                    transition: top, 0.3s;
+                }
+
+.details {
+    background: white;
+}
+
+    .details__step:before {
+        position: relative;
+        left: 50%;
+
+        display: block;
+
+        width: 80px;
+        height: 100px;
+        margin-left: -40px;
+
+        content: '';
+
+        background: url('../images/endnote-sprite-600x170v2.png') no-repeat;
+        background-repeat: no-repeat;
+    }
+
+    .details__discover:before {
+        background-position: -250px 0;
+    }
+
+    .details__register:before {
+        background-position: -330px 0;
+    }
+
+    .details__create:before {
+        background-position: -410px 0;
+    }
+
+        .details__h2 {
+            text-align: center;
+            margin: 0 0 10px;
+        }
+
+        .details__link, .details__link:hover {
+            font: 1.1em 'knowledgeMedium';
+
+            color: currentColor;
+        }
+
+            .details__arrow {
+                position: relative;
+                left: 0;
+
+                transition: left 0.3s;
+            }
+
+                .details__link:hover .details__arrow {
+                    left: 10px;
+
+                    transition: left 0.3s;
+                }
+
+
+
+
+
+/* -----------------------------------*/
+/* #SIDEBAR
+/* -----------------------------------*/
+
+.sidebar {
+
+    background: #FF8000;
+}
+
+    .sidebar__nav {
+        text-align: right;
+    }
+
+        .sidebar__nav > li {
+            font: 2em 'knowledge';
+            line-height: 1.48em;
+        }
+
+        .sidebar__nav ul li {
+            font-size: .8em;
+            line-height: 1.2em;
+        }
+
+            .sidebar__nav a {
+                color: white;
+            }
+
+                .sidebar__nav a:hover {
+
+                }
+
+                .sidebar__nav .active {
+                    color: black;
+                }
+
+
+
+
+
+/* -----------------------------------*/
+/* #BROWSER
+/* -----------------------------------*/
+
+.browser {
+    background: #FF8000;
+}
+
+    .browser__view {
+        background: white;
+    }
+
+
+
+
+
+/* -----------------------------------*/
+/* #FOOTER
+/* -----------------------------------*/
+
+footer[role='contentinfo'] {
+    font: 0.9em 'knowledgeLight', Arial, Helvetica, sans-serif;
+
+    display: block;
+    overflow: auto;
+
+    width: 100%;
+    padding: 4em;
+}
+
+    .footer a {
+        color: currentColor;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    .footer__beta {
+        margin-top: 20px;
+    }
+
+        .footer__logo {
+            font: 1.3em 'knowledgeMedium';
+        }
+
+        .footer__legal {
+            font-size: 0.9em;
+        }
+
+            .footer__legal > li {
+                margin-left: 15px;
+            }
+
+
+
+
+
+/* -----------------------------------*/
+/* #OVERRIDES
+/* -----------------------------------*/
+
+nav[role="navigation"] {
+    padding-left: 0; /* Removes column padding from header nav */
+}
+
+.form-control:focus {
+    border: 1px solid #FF8000;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn:active, .btn.active, .btn:active:focus, .btn.active.focus,
+.btn.active:focus, .btn:active.focus  {
+    outline: none;
+    background: #E77707;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.btn:focus, .btn.focus {
+    border: 0;
+    outline: none;
+    background: #E77707;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+
+
+
+
+/* -----------------------------------*/
+/* #HELPER CLASSES
+/* -----------------------------------*/
+
+.highlight-color {
+    color: #ff8000 !important; /* Orange */
+}
+
+.primary-color {
+    color: #666 !important; /* Gray */
+}
+
+.secondary-color {
+    color: white !important;
+}

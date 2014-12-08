@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EndNote Developer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href="assets/css/reset.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/loading-animation.css" rel="stylesheet" />
+    <link href="assets/css/media-queries.css" rel="stylesheet" />
+    <link href="assets/css/fonts.css" rel="stylesheet" />
+
+</head>
+
+
+
+
+
+<body ng-app="app">
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+
+
+
+    <div class="container">
+
+        <my-header></my-header>
+
+        <main role="main">
+
+            <div id="viewPort" ng-view></div>
+
+        </main>
+
+        <my-footer></my-footer>
+
+    </div>
+
+
+
+
+
+    <script src="assets/lib/modernizr.js"></script>
+    <script src="assets/lib/angular.js"></script>
+    <script src="assets/lib/angular-route.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="app/services/pageInfo.js"></script>
+    <script src="app/services/navMap.js"></script>
+    <script src="app/services/hasContent.js"></script>
+
+    <script src="app/shared/header/headerDirective.js"></script>
+    <script src="app/shared/header/headerCtrl.js"></script>
+    <script src="app/shared/header/panel/panelCtrl.js"></script>
+    <script src="app/shared/header/results/resultsCtrl.js"></script>
+    <script src="app/shared/header/results/resultsDir.js"></script>
+    <script src="app/components/status/statusCtrl.js"></script>
+    <script src="app/shared/footer/footerDirective.js"></script>
+    <script src="app/shared/footer/footerCtrl.js"></script>
+    <script src="app/shared/header/panel/panelDirective.js"></script>
+    <script src="app/shared/loader/loaderDirective.js"></script>
+    <script src="app/shared/sidebar/sidebarDirective.js"></script>
+    <script src="app/shared/sidebar/sidebarCtrl.js"></script>
+    <script src="app/shared/browser/browserDirective.js"></script>
+    <script src="app/shared/browser/browserCtrl.js"></script>
+</body>
+</html>

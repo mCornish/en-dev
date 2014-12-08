@@ -1,0 +1,6 @@
+BEM
+Modular organization
+Bootstrap
+js-specific selectors
+controller as objects to avoid scope issues
+unit tests

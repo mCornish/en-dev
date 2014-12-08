@@ -1,0 +1,36 @@
+@media only screen and (max-width: 1200px)
+{
+    html
+    {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 992px) /* Mobile */
+{
+    html
+    {
+        font-size: 12px;
+    }
+    footer {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    #stepDetails .row
+    {
+        text-align: center;
+    }
+    #stepDetails .step {
+      margin-bottom: 2em;
+    }
+    #bottom-wrap .footerLogo2 {
+      padding: 20px 0 10px;
+      width: 100%;
+    }
+    #bottom-wrap nav {
+      text-align: left;
+    }
+    #bottom-wrap ul {
+      padding: 0;
+    }
+}

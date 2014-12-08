@@ -1,0 +1,189 @@
+<h1>EndNote Web API Overview</h1>
+
+<p>
+    The EndNote Web API (EN API) is a protocol for exchanging EndNote data with the EndNote web service. The data structures and remote procedures supported by EN API are expressed using the <a href="http://services.thomsoninnovation.com/ip-webservices/xrpc-demo/docs/isi_xrpc41.html">ISI XRPC 4.1 Protocol Specification</a>. These data structures and remote procedures are also exposed via Apache Thrift.
+</p>
+
+<p>
+    The EN API XRPC documentation includes a definition of the following data types from the core EndNote data model:
+</p>
+
+<ul class="standard-list">
+    <li>
+        Group
+    </li>
+    <li>
+        GroupSet
+    </li>
+    <li>
+        Reference
+    </li>
+    <li>
+        ReferenceBiblioContent
+    </li>
+    <li>
+        FigureResource
+    </li>
+    <li>
+        ForeignKeys
+    </li>
+</ul>
+
+<p>
+    The interfaces also express a set of remote procedures, broken down into two different logical “services”:
+</p>
+
+<p class="toggle" ng-class="userOpen ? 'toggle--open' : ''">
+    <span ng-init="userOpen = false" ng-click="userOpen = !userOpen">UserStore</span>
+</p>
+
+<ul class="standard-list" ng-show="userOpen">
+    <li>
+        authenticate
+    </li>
+    <li>
+        authenticateBySteamID
+    </li>
+    <li>
+        getAccountInfo
+    </li>
+    <li>
+        logout
+    </li>
+    <li>
+        refreshAuthentication
+    </li>
+    <li>
+        registerUser
+    </li>
+    <li>
+        sendForgottenPassword
+    </li>
+</ul>
+
+<p class="toggle" ng-class="refOpen ? 'toggle--open' : ''">
+    <span ng-init="refOpen = false" ng-click="refOpen = !refOpen">ReferenceStore</span>
+</p>
+
+<ul class="standard-list" ng-show="refOpen">
+    <li>
+        createFigureResource
+    </li>
+    <li>
+        createFileResource
+    </li>
+    <li>
+        createGroup
+    </li>
+    <li>
+        createGroupSet
+    </li>
+    <li>
+        deleteReference
+    </li>
+    <li>
+        expungeGroup
+    </li>
+    <li>
+        expungeGroupSet
+    </li>
+    <li>
+        expungeReference
+    </li>
+    <li>
+        expungeReferences
+    </li>
+    <li>
+        expungeGroupSet
+    </li>
+    <li>
+        expungeResource
+    </li>
+    <li>
+        expungeGroup
+    </li>
+    <li>
+        getCurrentUsage
+    </li>
+    <li>
+        getFigureResource
+    </li>
+    <li>
+        getFigureResourceData
+    </li>
+    <li>
+        getFileResource
+    </li>
+    <li>
+        getFileResourceData
+    </li>
+    <li>
+        getFilteredSyncChunk
+    </li>
+    <li>
+        getGroup (returns meta-data, not record lists)
+    </li>
+    <li>
+        getGroups (returns meta-data, not record lists)
+    </li>
+    <li>
+        getGroupSet
+    </li>
+    <li>
+        getGroupSets
+    </li>
+    <li>
+        getReference (returns attributes and optional data)
+    </li>
+    <li>
+        getReferences (returns attributes and optional data)
+    </li>
+    <li>
+        getSyncState
+    </li>
+    <li>
+        listGroups
+    </li>
+    <li>
+        listGroupSets
+    </li>
+    <li>
+        replaceFigureResource (figure is special in that there can be only one)
+    </li>
+    <li>
+        updateGroup (metadata, not record lists)
+    </li>
+    <li>
+        updateGroupSet
+    </li>
+    <li>
+        updateFigureResource
+    </li>
+    <li>
+        updateFileResource
+    </li>
+    <li>
+        updateReference
+    </li>
+</ul>
+
+<p>
+    The full documentation for these data structures and functions—both XRPC and Apache Thrift—is available upon request.
+</p>
+<p>
+    These interfaces are intended to be used to serve three different purposes:
+</p>
+<ol class="standard-list">
+    <li>
+        Internal ENWeb service components may query the UserStore or ReferenceStore service within the data center.
+    </li>
+    <li>
+        Full caching clients use the interface to perform data synchronization over HTTP via an external-facing “sync gateway” service.
+    </li>
+    <li>
+        Thin clients make direct use of the API over the HTTP gateway to view or manipulate the state of the user’s account directly. This may include the Capture Bookmark(let), Javascript web clients (via ASCII transport), or internal partners/integrations.
+    </li>
+</ol>
+<p>
+    As a result of this multi-use property of the API, there are some functions that are only relevant for one or two of the above scenarios, while others would be used by all three. For example, the “getFilteredSyncChunk” function is specific to the caching clients performing synchronization, while “authenticate” or “getFileResourceData” may be used by all three. Additional functions will be needed for scenario 3 that aren’t critical to this initial release; therefore, this document is limited to the synchronization case where a client with a local cache of References must synchronize against the EN service.
+</p>

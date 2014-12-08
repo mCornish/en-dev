@@ -1,0 +1,59 @@
+<section id="js-api-panel" ng-class="{'active' : toggle.state}" class="api-panel secondary-color row" ng-controller="panelCtrl">
+  <div id="js-api-container" class="api-panel__container row">
+    <div class="col-md-4">
+      <div class="api-panel__section">
+        <h3 class="api-panel__header">Developer Details</h2>
+        <form class="api-panel__form">
+           <label for="txtDevName">Developer's Name</label>
+           <input type="text" id="txtDevName" class="api-panel__input form-control" placeholder="Your Name"/>
+
+            <label for="txtInstitution">Institution</label>
+           <input type="text" id="txtInstitution" class="api-panel__input form-control" placeholder="(University, Company, Organization)"/>
+
+           <label for="txtEmail">Email</label>
+           <input type="email" id="txtEmail" class="api-panel__input form-control" placeholder="Your Email"/>
+
+            <label for="txtPhone">Phone</label>
+           <input type="tel" id="txtPhone" class="api-panel__input form-control" placeholder="Your Phone Number"/>
+
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="api-panel__section">
+        <h3 class="api-panel__header">Project Details</h2>
+        <form class="api-panel__form">
+          <label for="txtAppName">App Name</label>
+          <input type="text" id="txtAppName" class="api-panel__input form-control" placeholder="Application Name"/>
+
+          <label for="dropServices">Allowed Services</label>
+          <select class="api-panel__input form-control">
+            <option>Full Access</option>
+            <option>Read Only</option>
+            <option>Reference API</option>
+            <option>Formatter API</option>
+          </select>
+
+           <label for="txtClientId">Client ID</label>
+           <input type="text" id="txtClientId" class="api-panel__input form-control" placeholder="An ID Unique to You"/>
+
+            <label for="txtWebsite">Website</label>
+           <input type="tel" id="txtWebsite" class="api-panel__input form-control" placeholder="Website Hosting Your App"/>
+
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="api-panel__section">
+        <h3 class="api-panel__header">Submit</h3>
+        <div class="api-panel__terms">
+            <input class="api-panel__terms-check" type="checkbox" />
+            <span class="api-panel__terms-text">I accept the <a href="#" class="api-panel__terms-link secondary-color">Terms of Service</a></span>
+        </div>
+          <a href="#" id="js-api-submit" ng-click="submit()" class="api-panel__submit btn btn-primary btn-large btn-block submit">Submit</a>
+      </div>
+    </div>
+  </div>
+  <x-loader></x-loader>
+  <div id="js-api-confirm" class="api-panel__confirm">Submitted</div>
+</section>

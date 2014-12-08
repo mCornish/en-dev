@@ -1,0 +1,16 @@
+- Style content box.
+- Make a factory for location information (section and page).
+- Enter content.
+- Ask Curtis about status and sandbox pages.
+- Figure out way to route content pages dynamically (DRY principle).
+- API key functionality.
+- Search functionality.
+- Comment and make notes on website build and organization.
+  - BEM styles
+  - Modular organization
+- Get correct footer content (ie copy, links, logo).
+- Look for a solution to bulk-load JS files (Gulp?)
+- Separate into components
+- CSS table of contents?
+- Combine header and sidebar menus into one controller?
+- Unit tests

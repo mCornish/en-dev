@@ -1,0 +1,16 @@
+<div class="view">
+	<div class="container">
+		<div class="row">
+			<div id="menuColumn" class="span4">
+				<ul ng-repeat="section in json">
+					<li class="header">{{section.heading}}</li>
+					<li ng-repeat="item in section.items"><a href ng-click="setPartial(item.template)">{{item.name}}</a></li>
+				</ul>
+			</div>
+
+			<div id="contentColumn">
+				<div ng-include="getPartial()"></div>
+			</div>
+		</div>
+	</div>
+</div>
