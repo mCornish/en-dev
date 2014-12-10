@@ -1,4 +1,4 @@
-function sidebarCtrl($scope, $location, pageInfo, navMap) {
+function SidebarCtrl($scope, $location, pageInfo, navMap) {
 
     var self = this;
 
@@ -9,4 +9,4 @@ function sidebarCtrl($scope, $location, pageInfo, navMap) {
     };
 }
 
-angular.module('app').controller('sidebarCtrl', ['$scope', '$location', 'pageInfo', 'navMap', sidebarCtrl]);
+angular.module('app').controller('SidebarCtrl', ['$scope', '$location', 'pageInfo', 'navMap', SidebarCtrl]);

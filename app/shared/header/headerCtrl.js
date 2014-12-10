@@ -1,7 +1,9 @@
 function headerCtrl($scope, pageInfo, navMap) {
 
     var self = this;
-    //test
+
+    $scope.panelOpen = false;
+
     self.map = navMap.getMap();
 
     self.isActive = function(page) {

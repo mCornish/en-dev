@@ -1,16 +1,62 @@
-/* ------------------------------------------------------*/
-/* ------------------------------------------------------*/
-/* #GLOBAL
-/* ------------------------------------------------------*/
-/* ------------------------------------------------------*/
+/**
+ * CONTENTS
+ *
+ * NOTE: All section headings begin with a '#' to facilitate searching this file
+ *
+ * BASE - Site-wide styles
+ * High-level...........html, body styles.
+ * Headings.............header, h1–h3 styles.
+ * Text.................p, a, strong, li, etc.
+ * Form elements........label, input, and other form tags.
+ *
+ * OBJECTS - Reusable elements
+ * Container............Wrap around contained elements.
+ * Nav..................Used for all site navigation.
+ * Panel................Container for togglable elements.
+ * Toggle...............Hide and show text.
+ * Search...............Search bar.
+ * Standard list........Styled as a traditional list.
+ *
+ * COMPONENTS - Reusable views
+ * Page header............The main page header.
+ * API panel..............Button-controlled panel.
+ * Results panel..........Search input-controlled panel.
+ * Sidebar................Container for side content.
+ * Browser................Uses sidebar to navigate and display content.
+ * Page footer............The main page footer.
+ *
+ * VIEWS - Independent HTML pages
+ * Homepage...............Site homepage.
+ *
+ * OVERRIDES - Bootstrap overrides
+ * Nav....................Removes left padding from main header.
+ * Form control...........Adjusts form control highlight color.
+ * Button.................Adjusts button highlight color.
+ *
+ * HELPERS - Reusable CSS trumps
+ * Colors................Color helpers.
+ *
+ **/
+
+
+
+
+
+/*------------------------------------*\
+ *------------------------------------*
+    #BASE
+ *------------------------------------*
+\*------------------------------------*/
 
 html {
     font-size: 16px;
 }
 
+
 body {
     background: #BABABA url('../images/body-bg.jpg') repeat-x;
 }
+
 
 header {
     clear: both;
@@ -31,6 +77,7 @@ h3 {
     line-height: 1.48;
 }
 
+
 p {
     font: 1rem Arial, Helvetica, sans-serif;
 
@@ -39,43 +86,104 @@ p {
     margin-bottom: 1.1rem;
 }
 
+
 a, a:focus, a:hover {
     text-decoration: none;
+}
+
+
+strong, b {
+    font-weight: bold;
+}
+
+em, i {
+    font-style: italic;
+}
+
+ol ol {
+    list-style-type: lower-alpha;
 }
 
 li {
     line-height: 1.48em;
 }
 
+
 label {
     font: 1.1rem 'knowledgeRegular';
 
-    text-transform: uppercase;
-
-    color: #FFF;
+    text-transform: capitalize;
 }
 
 input, select {
     font-family: 'knowledge';
 }
 
-strong, b {
-    font-weight: bold;
+
+
+
+
+/*------------------------------------*\
+ *------------------------------------*
+    #OBJECTS
+ *------------------------------------*
+\*------------------------------------*/
+
+/*------------------------------------*\
+    #CONTAINER
+\*------------------------------------*/
+
+.container--padded {
+    padding: 3em;
+}
+
+
+.container--small {
+    border-radius: 1em;
+    padding: 2em;
 }
 
 
 
 
 
-/* ------------------------------------------------------*/
-/* ------------------------------------------------------*/
-/* #COMPONENTS
-/* ------------------------------------------------------*/
-/* ------------------------------------------------------*/
+/*------------------------------------*\
+    #INPUT WRAPPER
+\*------------------------------------*/
+.input-wrapper {
+    position: relative;
+}
 
-/* -----------------------------------*/
-/* #NAV
-/* -----------------------------------*/
+    .input-wrapper > label {
+        color: #949494;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 7px 14px;
+        line-height: 1.48em;
+        cursor: text;
+        -webkit-user-select: none;
+         -khtml-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+
+        -webkit-transition: color 0.2s;
+           -moz-transition: color 0.2s;
+                transition: color 0.2s;
+    }
+
+        .input-wrapper input:focus + label {
+            color: #D2D2D2;
+        }
+
+
+
+
+
+/*------------------------------------*\
+    #NAV
+\*------------------------------------*/
 
 .nav {
     list-style: none;
@@ -92,6 +200,7 @@ strong, b {
             text-transform: capitalize;
         }
 
+
 .nav--vertical {
 
 }
@@ -105,11 +214,52 @@ strong, b {
 
 
 /* -----------------------------------*/
-/* #CONTAINER
+/* #PANEL
 /* -----------------------------------*/
+.panel {
+    position: relative;
 
-.container--padded {
-    padding: 3em;
+    overflow: hidden;
+
+    max-height: 0;
+
+    -webkit-transition: max-height 0.5s;
+	   -moz-transition: max-height 0.5s;
+            transition: max-height 0.5s;
+}
+
+    .panel.active {
+        max-height: 500px;  /* This must be higher than the height
+                               of the panel's contents */
+    }
+
+
+
+
+
+/*------------------------------------*\
+    #SEARCH
+\*------------------------------------*/
+.search {
+    width: 25em;
+}
+
+    .search__input:hover + .search__label {
+        color: #D2D2D2;
+    }
+
+
+
+
+
+/*------------------------------------*\
+    #STANDARD LIST
+\*------------------------------------*/
+
+.standard-list {
+    padding-left: 3em;
+    margin-bottom: 1.1em;
+    font-family: Arial;
 }
 
 
@@ -122,44 +272,36 @@ strong, b {
 
 .toggle {
     display: block;
-    cursor: pointer;
 }
 
-    .toggle::after {
-        content: '▼';
-        font-size: 0.8em;
+    .toggle__button {
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
     }
 
-    .toggle--open::after {
-        content: '▲';
-    }
+        .toggle__button::after {
+            content: '▼';
+            font-size: 0.8em;
+        }
+
+        .toggle--open::after {
+            content: '▲';
+        }
 
 
 
 
 
-/* -----------------------------------*/
-/* #STANDARD LIST
-/* -----------------------------------*/
+/*------------------------------------*\
+ *------------------------------------*
+    #COMPONENTS
+ *------------------------------------*
+\*------------------------------------*/
 
-.standard-list {
-    padding-left: 3em;
-    margin-bottom: 1.1em;
-    font-family: Arial;
-}
-
-
-
-
-/* ------------------------------------------------------*/
-/* ------------------------------------------------------*/
-/* #VIEWS
-/* ------------------------------------------------------*/
-/* ------------------------------------------------------*/
-
-/* -----------------------------------*/
-/* #HEADER
-/* -----------------------------------*/
+/*------------------------------------*\
+    #HEADER
+\*------------------------------------*/
 
 header[role='banner'] {
     position: relative;
@@ -189,11 +331,7 @@ header[role='banner'] {
                 font-family: 'knowledge-light';
             }
 
-        .search {
-            position: absolute;
-            right: 0;
-
-            width: 25em;
+        .header__search {
             margin-top: 15px;
         }
 
@@ -235,19 +373,12 @@ header[role='banner'] {
 
         .header__key-btn {
             font-family: 'knowledge';
-            position: absolute;
-            right: 0;
-
-            width: 8em;
-            margin: 7px 0;
-
-            border: none;
+            margin: 5px 0;
             background: #FF8000;
         }
 
-            .header__key-btn:hover, .header__key-btn:focus, .header__key-btn.active {
+            .header__key-btn:hover, .header__key-btn.active {
                 color: white;
-                border: none;
                 background: #E77707;
             }
 
@@ -255,94 +386,63 @@ header[role='banner'] {
 
 
 
-/* -----------------------------------*/
-/* #API PANEL
-/* -----------------------------------*/
+/*------------------------------------*\
+    #API PANEL
+\*------------------------------------*/
 
 .api-panel {
-    position: relative;
-    z-index: 1;
-
-    overflow: hidden;
-
-    height: 0;
-
-    transition: height 0.2s;
-
     background: #FF8000;
 }
 
-    .api-panel.active {
-        height: 475px;
-
-        transition: height 0.2s;
-    }
-
     .api-panel__container {
-        overflow: hidden;
-
-        margin: 0 auto;
-        padding: 28px;
+        background: rgba(0, 0, 0, 0.1);
     }
-
-        .api-panel__section {
-            padding: 30px;
-
-            border: 0;
-            border-radius: 15px;
-            background: rgba(0, 0, 0, 0.1);
+        .api-panel__header {
+            text-align: center;
         }
 
-            .api-panel__header {
-                text-align: center;
+        .api-panel__form {
+            margin-top: 20px;
+        }
+
+            .api-panel__input {
+                margin-bottom: 15px;
             }
 
-            .api-panel__form {
-                margin-top: 20px;
+            .api-panel__terms {
+                margin: 20px 0;
             }
 
-                .api-panel__input {
-                    margin-bottom: 15px;
+                .api-panel__terms-check {
+                    width: 25px;
                 }
 
-                    .api-panel__input:focus {
-                        background: #F0D9C0;
-                    }
-
-                .api-panel__terms {
-                    margin: 20px 0;
+                .api-panel__terms-text {
+                    font: 1rem 'knowledge';
                 }
 
-                    .api-panel__terms-check {
-                        width: 25px;
-                    }
+                .api-panel__terms-link {
+                    text-decoration: underline;
+                }
 
-                    .api-panel__terms-text {
-                        font: 1rem 'knowledge';
-                    }
-
-                    .api-panel__terms-link {
+                    .api-panel__terms-link:hover {
                         text-decoration: underline;
+
+                        color: black;
                     }
 
-                        .api-panel__terms-link:hover {
-                            text-decoration: underline;
+            .api-panel__submit {
+                font: 1rem 'knowledgeMedium';
 
-                            color: black;
-                        }
+                text-transform: uppercase;
 
-                .api-panel__submit {
-                    font: 1rem 'knowledgeMedium';
+                border: none;
+                background: rgba(0, 0, 0, 0.2);
+            }
 
-                    text-transform: uppercase;
-
-                    border: none;
-                    background: rgba(0, 0, 0, 0.2);
+                .api-panel__submit:hover {
+                    background: rgba(0, 0, 0, 0.4);
                 }
-
-                    .api-panel__submit:hover {
-                        background: rgba(0, 0, 0, 0.4);
-                    }
     .loader {
         display: none;
 
@@ -353,8 +453,6 @@ header[role='banner'] {
 
     .api-panel__confirm {
         font: 3em 'knowledgeMedium';
-
-        display: none;
 
         width: 200px;
         height: 13%;
@@ -368,36 +466,118 @@ header[role='banner'] {
 
 
 
-/* -----------------------------------*/
-/* #RESULTS PANEL
-/* -----------------------------------*/
+/*------------------------------------*\
+    #RESULTS PANEL
+\*------------------------------------*/
 
 .search-results {
-    position: relative;
-    z-index: 1;
+    background: #FF8000;
+}
 
-    overflow: hidden;
 
-    height: 0;
 
-    transition: height 0.2s;
+
+
+/*------------------------------------*\
+    #SIDEBAR
+\*------------------------------------*/
+
+.sidebar {
 
     background: #FF8000;
 }
 
-    .search-results.active {
-        height: 475px;
+    .sidebar__nav {
+        text-align: right;
+    }
 
-        transition: height 0.2s;
+        .sidebar__nav > li {
+            font: 2em 'knowledge';
+            line-height: 1.48em;
+        }
+
+        .sidebar__nav ul li {
+            font-size: .8em;
+            line-height: 1.2em;
+        }
+
+            .sidebar__nav a {
+                color: white;
+            }
+
+                .sidebar__nav a:hover {
+
+                }
+
+                .sidebar__nav .active {
+                    color: black;
+                }
+
+
+
+
+
+/*------------------------------------*\
+    #BROWSER
+\*------------------------------------*/
+
+.browser {
+    background: #FF8000;
+}
+
+    .browser__view {
+        background: white;
     }
 
 
 
 
 
-/* -----------------------------------*/
-/* #HOMEPAGE
-/* -----------------------------------*/
+/*------------------------------------*\
+    #FOOTER
+\*------------------------------------*/
+
+footer[role='contentinfo'] {
+    font: 0.9em 'knowledgeLight', Arial, Helvetica, sans-serif;
+
+    display: block;
+    overflow: auto;
+
+    width: 100%;
+    padding: 4em;
+}
+
+    .footer a {
+        color: currentColor;
+    }
+
+        .footer__alpha a:hover, .footer__legal a:hover {
+            text-decoration: underline;
+        }
+
+    .footer__beta {
+        margin-top: 20px;
+    }
+
+        .footer__logo {
+            font: 1.3em 'knowledgeMedium';
+        }
+
+        .footer__legal {
+            font-size: 0.9em;
+        }
+
+            .footer__legal > li {
+                margin-left: 15px;
+            }
+
+
+
+
+
+/*------------------------------------*\
+    #HOMEPAGE
+\*------------------------------------*/
 
 .intro {
     background: url('../images/chalk.jpg');
@@ -532,113 +712,18 @@ header[role='banner'] {
 
 
 
-/* -----------------------------------*/
-/* #SIDEBAR
-/* -----------------------------------*/
+/*------------------------------------*\
+ *------------------------------------*
+    #OVERRIDES
+ *------------------------------------*
+\*------------------------------------*/
 
-.sidebar {
-
-    background: #FF8000;
-}
-
-    .sidebar__nav {
-        text-align: right;
-    }
-
-        .sidebar__nav > li {
-            font: 2em 'knowledge';
-            line-height: 1.48em;
-        }
-
-        .sidebar__nav ul li {
-            font-size: .8em;
-            line-height: 1.2em;
-        }
-
-            .sidebar__nav a {
-                color: white;
-            }
-
-                .sidebar__nav a:hover {
-
-                }
-
-                .sidebar__nav .active {
-                    color: black;
-                }
-
-
-
-
-
-/* -----------------------------------*/
-/* #BROWSER
-/* -----------------------------------*/
-
-.browser {
-    background: #FF8000;
-}
-
-    .browser__view {
-        background: white;
-    }
-
-
-
-
-
-/* -----------------------------------*/
-/* #FOOTER
-/* -----------------------------------*/
-
-footer[role='contentinfo'] {
-    font: 0.9em 'knowledgeLight', Arial, Helvetica, sans-serif;
-
-    display: block;
-    overflow: auto;
-
-    width: 100%;
-    padding: 4em;
-}
-
-    .footer a {
-        color: currentColor;
-    }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-    .footer__beta {
-        margin-top: 20px;
-    }
-
-        .footer__logo {
-            font: 1.3em 'knowledgeMedium';
-        }
-
-        .footer__legal {
-            font-size: 0.9em;
-        }
-
-            .footer__legal > li {
-                margin-left: 15px;
-            }
-
-
-
-
-
-/* -----------------------------------*/
-/* #OVERRIDES
-/* -----------------------------------*/
-
-nav[role="navigation"] {
-    padding-left: 0; /* Removes column padding from header nav */
+nav[role="navigation"], .header__search {
+    padding-left: 0; /* Removes Bootstrap column padding from header elements */
 }
 
 .form-control:focus {
-    border: 1px solid #FF8000;
+    border: 1px solid #ccc;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -647,16 +732,13 @@ nav[role="navigation"] {
 .btn:active, .btn.active, .btn:active:focus, .btn.active.focus,
 .btn.active:focus, .btn:active.focus  {
     outline: none;
-    background: #E77707;
     -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
     -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
     box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
 }
 
 .btn:focus, .btn.focus {
-    border: 0;
     outline: none;
-    background: #E77707;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -666,9 +748,11 @@ nav[role="navigation"] {
 
 
 
-/* -----------------------------------*/
-/* #HELPER CLASSES
-/* -----------------------------------*/
+/*------------------------------------*\
+ *------------------------------------*
+    #HELPER CLASSES
+ *------------------------------------*
+\*------------------------------------*/
 
 .highlight-color {
     color: #ff8000 !important; /* Orange */
@@ -680,4 +764,8 @@ nav[role="navigation"] {
 
 .secondary-color {
     color: white !important;
+}
+
+.courier {
+    font-family: courier !important;
 }

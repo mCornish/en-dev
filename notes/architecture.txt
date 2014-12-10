@@ -1,6 +1,11 @@
-BEM
-Modular organization
-Bootstrap
-js-specific selectors
-controller as objects to avoid scope issues
-unit tests
+Files
+    Modular organization
+Angular
+    controller as objects to avoid scope issues
+    unit tests
+CSS
+    http://cssguidelin.es/
+    BEM
+    Bootstrap
+    js-specific selectors
+    font-size responsiveness

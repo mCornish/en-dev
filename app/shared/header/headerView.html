@@ -1,14 +1,17 @@
 <header role="banner" class="container-fluid">
     <div class="header__alpha row">
         <div class="col-xs-6">
-            <a href="#">
+            <a href="#/">
                 <div class="logo__alpha primary-color">THOMSON REUTERS</div>
                 <div class="logo__beta highlight-color">
                     ENDNOTE<span class="logo__developer primary-color">Developer</span>
                 </div>
             </a>
         </div>
-        <input class="search form-control col-xs-6" type="search" placeholder="Search" ng-model="header.term" />
+        <div class="search header__search input-wrapper col-xs-6 pull-right">
+            <input class="search__input form-control" type="search" id="Search" ng-model="header.term" />
+            <label class="search__label" for="Search" ng-hide="header.term.length">Search</label>
+        </div>
     </div>
     <div class="header__beta row">
         <nav role="navigation" class="col-xs-10">
@@ -19,7 +22,7 @@
             </ul>
         </nav>
         <div class="col-xs-2">
-            <button href="#" id="key-btn" class="header__key-btn secondary-color btn" ng-click="toggle.state = !toggle.state" ng-class="{'active' : toggle.state}">Get an API Key</button>
+            <button href="#" id="key-btn" class="header__key-btn secondary-color btn pull-right" ng-click="header.panelOpen = !header.panelOpen" ng-class="{'active' : header.panelOpen}">Get an API Key</button>
         </div>
     </div>
     <x-api-panel></x-api-panel>

@@ -1,5 +1,5 @@
 // If the link's name corresponds to the current page, add active class
-function pageInfo($location) {
+function pageInfo($location, $templateCache, navMap) {
 
     var path, slashOne, slashTwo,
         partial, path1, path2;
@@ -9,6 +9,7 @@ function pageInfo($location) {
         slashOne = path.lastIndexOf('/');
         slashTwo = path.lastIndexOf('/', slashOne-1);
     };
+
 
     init();
 
@@ -25,6 +26,9 @@ function pageInfo($location) {
         },
 
         getPartial: function() {
+
+            if(path === '/') return; // No partial from home page
+
             page = this.getPage();
             section = this.getSection();
 
@@ -38,4 +42,4 @@ function pageInfo($location) {
     };
 }
 
-angular.module('app').factory('pageInfo', ['$location', pageInfo]);
+angular.module('app').factory('pageInfo', ['$location', '$templateCache', 'navMap', pageInfo]);

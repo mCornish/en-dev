@@ -31,8 +31,21 @@ module.exports = function(grunt) {
             tasks: ['karma:unit:run']
         }
     },
-    qunit: {
-        files: ['test/**/*.js']
+    concat: {
+        dist: {
+            src: [
+                'assets/lib/*.js',
+                'app/**/*.js',
+                'app/**/**/*.js',
+                'app/app.js'
+            ],
+            dest: 'assets/js/prod.js'
+        }
+    },
+    browserSync: {
+        files: {
+            src: 'assets/css/style.css'
+        }
     }
   });
 
@@ -40,7 +53,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-browser-sync');
 
   // Default task(s).
   grunt.registerTask('default', []);

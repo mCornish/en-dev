@@ -2,11 +2,16 @@
   "name": "enw-dev",
   "version": "0.1.0",
   "description": "EndNote Development Portal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mCornish/en-dev.git"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-browser-sync": "^1.5.3",
+    "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-qunit": "^0.5.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-karma": "^0.9.0",
     "karma": "^0.12.28",
