@@ -1,0 +1,106 @@
+<div class="toggle" ng-init="recSync = false">
+    <p class="toggle__button" ng-click="recSync = !recSync" ng-class="recSync ? 'toggle--open' : ''">
+        Recovery Sync
+    </p>
+
+    <p class="toggle__list" ng-show="recSync">
+        <em>General Algorithm:</em>
+    </p>
+
+    <ol class="standard-list toggle__list" ng-show="recSync">
+        <li>
+            Create a local list of GroupSet items via <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntries,filter)</span>.
+        </li>
+        <li>
+            Process the list of GroupSet items in order to construct the current state of the service.
+        </li>
+        <li>
+            Create a local list of Group items via <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0 ,maxEntries,filter)</span>.
+        </li>
+        <li>
+             Process the list of Group items in order to construct the current state of the service.
+        </li>
+        <li>
+            Create a local list of Reference items via <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntries,filter)</span>.
+        </li>
+        <li>
+            Process the list of Reference items in order to construct the current state of the service.
+        </li>
+        <li>
+            For any items in the client list that have GUID’s but do not exist in the service list, purge the GUID from the local item and send to the service as a new item.
+        </li>
+        <li>
+            Store the server’s updateCount(from <span class="courier">getSyncState</span>) to lastUpdateCount and the server’s current time(from <span class="courier">getSyncState</span>) to lastSyncTime.
+        </li>
+        <li>
+            Go to <b>Send Changes</b>.
+        </li>
+    </ol>
+
+    <p class="toggle__list" ng-show="recSync">
+        <em>Specifics:</em>
+    </p>
+
+    <ol class="standard-list toggle__list" ng-show="recSync">
+        <li>
+            <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntr ies,filter)</span> will return the metadata for at most maxEntries objects (of any type), starting from the least-recently-modified object in the account. This includes the full state of “small” objects like Groups, but only includes the metadata for References (unless option to include all reference content is set), FileResources and FigureResources. Binary resource content must be requested separately, later. Expunged (deleted permanently) objects are included by (GUID) only.
+        </li>
+        <li>
+            Call <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntr ies,filter)</span> to get the first block of data objects from the service. If chunk’s chunkHighUSN is less than chunk’s updateCount, buffer the chunk and request the next chunk by calling <span class="courier">ReferenceStore.getFilteredSyncChunk</span> with afterUSN = chunkHighUSN. (This can be done safely in spite of a time gap between chunks).
+        </li>
+        <li>
+            If an item exists on the server, but not on the client, add to the client DB(unless it’s identified as being expunged).
+        </li>
+        <li>
+            If an item exists on the client, but not on the service:
+            <ol class="standard-list">
+                <li>
+                    If the client’s item has a GUID or local USN, clear the GUID and local USN to mark the item as new on the client and upload later during “Send Changes”.
+                </li>
+            </ol>
+        </li>
+        <li>
+            If an item exists on both the client and the server:
+            <ol class="standard-list">
+                <li>
+                    If they have the same USN and no “dirty” flag, then they’re in sync.
+                </li>
+                <li>
+                    If they have the same USN, but the client’s item has a “dirty” flag, then it should be uploaded to the server later.
+                </li>
+                <li>
+                    If the server’s item has a higher USN and the client has no “dirty” flag, then update the state of the client’s item with the server’s object.
+                </li>
+                <li>
+                    If the server’s item has a higher USN and the client has a “dirty” flag, then the object has been modified on both the server and the client. If possible, compare the server relative timestamps and favor the latest timestamp; otherwise, report the conflict for resolution.
+                </li>
+            </ol>
+        </li>
+        <li>
+            If a GroupSet is deleted from the client, all of its Groups are deleted (unless it's the last GroupSet which cannot be deleted).
+        </li>
+        <li>
+            If a Group is deleted from the client, all of its References are only removed from the group membership and remain in the library and associated to any other groups it already belongs to. This means when UI deletes a group, it needs to manage group membership on its system and flag all affected References as dirty with respect to their metadata(which includes group membership).
+        </li>
+        <li>
+            The binary content of resources will not be transmitted as part of the sync block. The biblio content of References is not transmitted by default and can be requested via the sync chunk filter or separately via ReferenceStore.getReference(...).
+            <ol class="standard-list">
+                <li>
+                    The service will always return metadata with Reference chunks. This includes group membership information, favorites rating, read status, reference timestamps, Figure and File metadata, etc.
+                </li>
+                <li>
+                    If the reference biblio data was changed(tracked via separate USN on the server), then a flag in the reference structure in the sync chunk will indicate the content should be retrieved via getReference if it was not retrieved as part of the sync chunk.
+                </li>
+                <li>
+                    The client should inspect all Figure and File structures. If the service returned an item in these lists that is not on the client(as determined by GUID(and not already flagged for expungement on the client), then add this item to the client using appropriate API to retrieve the data from the service.
+                </li>
+                <li>
+                    The client should also use the checksum and file length to compare all Figure and File objects with what is on the client. If any of these are different, then update the client object with the server data. Keep in mind, you won’t get to this point if any of the figure, files, biblio or meta data has also changed on the client because this will have been flagged as a conflict.
+                </li>
+                <li>
+                    When References are expunged, their Figure and File Resources are also expunged.
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>

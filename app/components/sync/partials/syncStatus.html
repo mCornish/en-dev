@@ -1,0 +1,25 @@
+<div class="toggle" ng-init="sync = false">
+    <p class="toggle__button" ng-click="sync = !sync" ng-class="sync ? 'toggle--open' : ''">
+        Sync Status
+    </p>
+    <p class="toggle__list" ng-show="sync">
+        Call <span class="courier">ReferenceStore.getSyncState(...)</span> to get the server’s <span class="courier">updateCount</span>, <span class="courier">currentTime</span>, <span class="courier">recoverySyncBefore</span> and <span class="courier">fullSyncBefore</span> values.
+    </p>
+    <ol class="standard-list toggle__list" ng-show="sync">
+        <li>
+            If the client has never synched with the service before, continue to <b>Initial Sync</b>.
+        </li>
+        <li>
+            If ( <span class="courier">recoverySyncBefore > lastSyncTime</span> ), continue to <b>Recovery Sync</b>.
+        </li>
+        <li>
+            If ( <span class="courier">fullSyncBefore > lastSyncTime</span> ), continue to <b>Full Sync</b>.
+        </li>
+        <li>
+            If ( <span class="courier">updateCount = lastUpdateCount</span> ), the server has no updates. Skip to <b>Send Changes</b>.
+        </li>
+        <li>
+            Otherwise, perform an incremental update sync (go to <b>Incremental Sync)</b>.
+        </li>
+    </ol>
+</div>

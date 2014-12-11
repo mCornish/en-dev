@@ -1,0 +1,66 @@
+<div class="toggle" ng-init="initSync = false">
+    <p class="toggle__button" ng-click="initSync = !initSync" ng-class="initSync ? 'toggle--open' : ''">
+        Initial Sync
+    </p>
+
+    <p class="toggle__list" ng-show="initSync">
+        <em>General Algorithm:</em>
+    </p>
+
+    <ol class="standard-list toggle__list" ng-show="initSync">
+        <li>
+            Create a local list of GroupSet items via <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntries,filter)</span>.
+        </li>
+        <li>
+            Process the list of GroupSet items in order. Add each item to the client DB unless it’s identified as being expunged.
+        </li>
+        <li>
+            Create a local list of Group items via <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0 ,maxEntries,filter)</span>.
+        </li>
+        <li>
+            Process the list of Group items in order. Add each item to the client DB unless it’s identified as being expunged.
+        </li>
+        <li>
+            Create a local list of Reference items via <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntries,filter)</span>.
+        </li>
+        <li>
+            Process the list of Reference items in order. Add each item to the client DB unless it’s identified as being expunged.
+        </li>
+        <li>
+            Store the server’s updateCount(from <span class="courier">getSyncState</span>) to lastUpdateCount and the server’s current time(from <span class="courier">getSyncState</span>) to lastSyncTime.
+        </li>
+        <li>
+            Go to <b>Send Changes</b>.
+        </li>
+    </ol>
+
+    <p class="toggle__list" ng-show="initSync">
+        <em>Specifics:</em>
+    </p>
+
+    <ol class="standard-list toggle__list" ng-show="initSync">
+        <li>
+            <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntr ies,filter)</span> will return the metadata for at most maxEntries objects (of any type), starting from the least-recently-modified object in the account. This includes the full state of “small” objects like Groups, but only includes the metadata for References (unless option to include all reference content is set), FileResources and FigureResources. Binary resource content must be requested separately, later. Expunged (deleted permanently) objects are included by (GUID) only.
+        </li>
+        <li>
+            Call <span class="courier">ReferenceStore.getFilteredSyncChunk(afterUSN=0,maxEntr ies,filter)</span> to get the first block of data objects from the service. If chunk’s chunkHighUSN is less than chunk’s updateCount, buffer the chunk and request the next chunk by calling <span class="courier">ReferenceStore.getFilteredSyncChunk</span> with afterUSN = chunkHighUSN. (This can be done safely in spite of a time gap between chunks).
+        </li>
+        <li>
+            The binary content of resources will not be transmitted as part of the sync block. The biblio content of References is not transmitted by default and can be requested via the sync chunk filter or separately via ReferenceStore.getReference(...).
+            <ol class="standard-list">
+                <li>
+                    The service will always return metadata with Reference chunks. This includes group membership information, favorites rating, read status, reference timestamps, Figure and File metadata, etc.
+                </li>
+                <li>
+                    Reference biblio data should always be pulled regardless of the biblioContentUpdated flag in the reference structure in the sync chunk that indicates whether or not the content should be retrieved via <span class="courier">getReference</span>. This is because this is “initial” sync and therefore the data is needed.
+                </li>
+                <li>
+                    The client should retrieve all Figure and File structures using appropriate API to retrieve the data from the service.
+                </li>
+                <li>
+                    Expunged group sets, groups, references, figures and files should be ignored.
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>

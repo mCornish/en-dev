@@ -1,0 +1,89 @@
+<div class="toggle" ng-init="auth = false">
+    <p class="toggle__button" ng-click="auth = !auth" ng-class="auth ? 'toggle--open' : ''">
+        Authentication
+    </p>
+    <ul class="standard-list toggle__list" ng-show="auth">
+        <li>
+            <p>
+                All API’s except the UserStore.authenticate, UserStore.authenticateBySteamID, UserStore.registerUser and UserStore.sendForgottenPassword will require the query string to have the authentication token set in it:
+            </p>
+            <p>
+                http://server.com/enwservices/xrpc?authToken=TOKEN&clientid=CLIENTID
+            </p>
+            <p>
+                http://server.com/enwservices/api/1.0/userstore?authToken=TOKEN&clienti d=CLIENTID
+            </p>
+            <p>
+                http://server.com/enwservices/api/1.0/referencestore?authToken=TOKEN&amp;clientid=CLIENTID
+            </p>
+        </li>
+        <li>
+            All API’s support HTTPS and Authentication API’s require HTTPS.
+        </li>
+        <li>
+            Production URL’s are burned into the desktop clients and an XML file override is supported to allow an application to point to QA and Dev environments.
+        </li>
+    </ul>
+    <ol class="standard-list toggle__list" ng-show="auth">
+        <li>
+            Authenticate to the service using UserStore.authenticate(username,pwd,key,secret) over HTTPS.
+            <ol class="standard-list">
+                <li>
+                    Receive opaque authenticationToken string to use for all other operations.
+                </li>
+                <li>
+                    Record expiration time of the authenticationToken. If token is near expiration* before any request to the server, get a new token (with a later expiration) via UserStore.refreshAuthentication(...) (over HTTPS only).
+                    <p>
+                        * “Near Expiration” This is meant to reduce the load on the server for creating new tokens. For this initial release of X6, we will follow this methodology:
+                    </p>
+                    <ol class="standard-list">
+                        <li>
+                            At the start of “Sync”, if the client has not persisted an authentication token.
+                            <ol class="standard-list">
+                                <li>
+                                    Authenticate per above
+                                </li>
+                                <li>
+                                    Proceed with sync per below.
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            At the start of “Sync”, if the client has persisted an authentication token.
+                            <ol class="standard-list">
+                                <li>
+                                    Refresh the token per above.
+                                    <ol class="standard-list">
+                                        <li>
+                                            If the refresh succeeds, proceed with sync per below.
+                                        </li>
+                                        <li>
+                                            If the refresh fails for any reason, discard the existing token and re-authenticate per above and proceed with Sync per below.
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            Optionally, refresh the token at the end of sync.
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li class="standard-list">
+            Ensure this database has not been synchronized to any other users. If it has, ensure there are no traces of any sync information in the client DB. This is mostly an edge case where one of a few things may have occurred:
+            <ol class="standard-list">
+                <li>
+                    User is now configuring a copy of a library they received from a peer(ENLX, thumb drive, etc)
+                </li>
+                <li>
+                    User has previously configured this library as their sync library, then configured a different library and is now setting this library as their sync library again.
+                </li>
+                <li>
+                    User is changing the service account they wish to sync with. This is not the same as changing their email for their service account.
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>
