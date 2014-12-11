@@ -33,139 +33,141 @@
     The interfaces also express a set of remote procedures, broken down into two different logical “services”:
 </p>
 
-<p class="toggle" ng-class="userOpen ? 'toggle--open' : ''">
-    <span ng-init="userOpen = false" ng-click="userOpen = !userOpen">UserStore</span>
-</p>
+<div class="toggle" ng-init="user = false">
+    <p class="toggle__button" ng-click="user = !user" ng-class="user ? 'toggle--open' : ''">
+        UserStore
+    </p>
+    <ul class="standard-list toggle__list" ng-show="user">
+        <li>
+            authenticate
+        </li>
+        <li>
+            authenticateBySteamID
+        </li>
+        <li>
+            getAccountInfo
+        </li>
+        <li>
+            logout
+        </li>
+        <li>
+            refreshAuthentication
+        </li>
+        <li>
+            registerUser
+        </li>
+        <li>
+            sendForgottenPassword
+        </li>
+    </ul>
+</div>
 
-<ul class="standard-list" ng-show="userOpen">
-    <li>
-        authenticate
-    </li>
-    <li>
-        authenticateBySteamID
-    </li>
-    <li>
-        getAccountInfo
-    </li>
-    <li>
-        logout
-    </li>
-    <li>
-        refreshAuthentication
-    </li>
-    <li>
-        registerUser
-    </li>
-    <li>
-        sendForgottenPassword
-    </li>
-</ul>
-
-<p class="toggle" ng-class="refOpen ? 'toggle--open' : ''">
-    <span ng-init="refOpen = false" ng-click="refOpen = !refOpen">ReferenceStore</span>
-</p>
-
-<ul class="standard-list" ng-show="refOpen">
-    <li>
-        createFigureResource
-    </li>
-    <li>
-        createFileResource
-    </li>
-    <li>
-        createGroup
-    </li>
-    <li>
-        createGroupSet
-    </li>
-    <li>
-        deleteReference
-    </li>
-    <li>
-        expungeGroup
-    </li>
-    <li>
-        expungeGroupSet
-    </li>
-    <li>
-        expungeReference
-    </li>
-    <li>
-        expungeReferences
-    </li>
-    <li>
-        expungeGroupSet
-    </li>
-    <li>
-        expungeResource
-    </li>
-    <li>
-        expungeGroup
-    </li>
-    <li>
-        getCurrentUsage
-    </li>
-    <li>
-        getFigureResource
-    </li>
-    <li>
-        getFigureResourceData
-    </li>
-    <li>
-        getFileResource
-    </li>
-    <li>
-        getFileResourceData
-    </li>
-    <li>
-        getFilteredSyncChunk
-    </li>
-    <li>
-        getGroup (returns meta-data, not record lists)
-    </li>
-    <li>
-        getGroups (returns meta-data, not record lists)
-    </li>
-    <li>
-        getGroupSet
-    </li>
-    <li>
-        getGroupSets
-    </li>
-    <li>
-        getReference (returns attributes and optional data)
-    </li>
-    <li>
-        getReferences (returns attributes and optional data)
-    </li>
-    <li>
-        getSyncState
-    </li>
-    <li>
-        listGroups
-    </li>
-    <li>
-        listGroupSets
-    </li>
-    <li>
-        replaceFigureResource (figure is special in that there can be only one)
-    </li>
-    <li>
-        updateGroup (metadata, not record lists)
-    </li>
-    <li>
-        updateGroupSet
-    </li>
-    <li>
-        updateFigureResource
-    </li>
-    <li>
-        updateFileResource
-    </li>
-    <li>
-        updateReference
-    </li>
-</ul>
+<div class="toggle" ng-init="ref = false">
+    <p class="toggle__button" ng-click="ref = !ref" ng-class="ref ? 'toggle--open' : ''">
+        ReferenceStore
+    </p>
+    <ul class="standard-list toggle__list" ng-show="ref">
+        <li>
+            createFigureResource
+        </li>
+        <li>
+            createFileResource
+        </li>
+        <li>
+            createGroup
+        </li>
+        <li>
+            createGroupSet
+        </li>
+        <li>
+            deleteReference
+        </li>
+        <li>
+            expungeGroup
+        </li>
+        <li>
+            expungeGroupSet
+        </li>
+        <li>
+            expungeReference
+        </li>
+        <li>
+            expungeReferences
+        </li>
+        <li>
+            expungeGroupSet
+        </li>
+        <li>
+            expungeResource
+        </li>
+        <li>
+            expungeGroup
+        </li>
+        <li>
+            getCurrentUsage
+        </li>
+        <li>
+            getFigureResource
+        </li>
+        <li>
+            getFigureResourceData
+        </li>
+        <li>
+            getFileResource
+        </li>
+        <li>
+            getFileResourceData
+        </li>
+        <li>
+            getFilteredSyncChunk
+        </li>
+        <li>
+            getGroup (returns meta-data, not record lists)
+        </li>
+        <li>
+            getGroups (returns meta-data, not record lists)
+        </li>
+        <li>
+            getGroupSet
+        </li>
+        <li>
+            getGroupSets
+        </li>
+        <li>
+            getReference (returns attributes and optional data)
+        </li>
+        <li>
+            getReferences (returns attributes and optional data)
+        </li>
+        <li>
+            getSyncState
+        </li>
+        <li>
+            listGroups
+        </li>
+        <li>
+            listGroupSets
+        </li>
+        <li>
+            replaceFigureResource (figure is special in that there can be only one)
+        </li>
+        <li>
+            updateGroup (metadata, not record lists)
+        </li>
+        <li>
+            updateGroupSet
+        </li>
+        <li>
+            updateFigureResource
+        </li>
+        <li>
+            updateFileResource
+        </li>
+        <li>
+            updateReference
+        </li>
+    </ul>
+</div>
 
 <p>
     The full documentation for these data structures and functions—both XRPC and Apache Thrift—is available upon request.

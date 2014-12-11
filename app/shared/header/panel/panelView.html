@@ -2,16 +2,16 @@
   <div id="js-api-container" class="container--padded row" ng-hide="panel.submitted">
     <div class="col-md-4">
       <div class="api-panel__container container--small">
-        <h3 class="api-panel__header">Developer Details</h2>
-        <form class="api-panel__form">
+        <h2 class="api-panel__header">Developer Details</h2>
+        <form class="api-panel__form" name="apiForm">
 
             <div class="input-wrapper">
-                <input type="text" id="txtDevName" class="api-panel__input form-control" ng-model="devName"/>
+                <input type="text" id="txtDevName" class="api-panel__input form-control" name="name" ng-model="devName" required/>
                 <label for="txtDevName" ng-hide="devName.length">Developer Name</label>
             </div>
 
             <div class="input-wrapper">
-                <input type="text" id="txtEmail" class="api-panel__input form-control" ng-model="devEmail"/>
+                <input type="text" id="txtEmail" class="api-panel__input form-control" ng-model="devEmail" required/>
                 <label for="txtEmail" ng-hide="devEmail.length">Developer Email</label>
             </div>
 
@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-4">
       <div class="api-panel__container container--small">
-        <h3 class="api-panel__header">Project Details</h2>
+        <h2 class="api-panel__header">Project Details</h2>
         <form class="api-panel__form">
 
             <div class="input-wrapper">
@@ -56,12 +56,12 @@
     </div>
     <div class="col-md-4">
       <div class="api-panel__container container--small">
-        <h3 class="api-panel__header">Submit</h3>
+        <h2 class="api-panel__header">Submit</h2>
         <div class="api-panel__terms">
-            <input class="api-panel__terms-check" type="checkbox" />
+            <input class="api-panel__terms-check" type="checkbox" ng-model="tosChecked"/>
             <span class="api-panel__terms-text">I accept the <a href="#" class="api-panel__terms-link secondary-color">Terms of Service</a></span>
         </div>
-          <button href="#" ng-click="panel.submit()" class="api-panel__submit btn btn-primary btn-large btn-block submit">Submit</button>
+          <button href="#" ng-click="tosChecked ? panel.submit() : panel.tosError = true" class="api-panel__submit btn btn-primary btn-large btn-block submit">Submit</button>
       </div>
     </div>
   </div>

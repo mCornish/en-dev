@@ -100,14 +100,17 @@ em, i {
     font-style: italic;
 }
 
-ol ol {
+ol ol, ul ol, ol ol ol ol {
     list-style-type: lower-alpha;
+}
+
+ol ol ol, ol ol ol ol ol {
+    list-style-type: lower-roman;
 }
 
 li {
     line-height: 1.48em;
 }
-
 
 label {
     font: 1.1rem 'knowledgeRegular';
@@ -117,6 +120,17 @@ label {
 
 input, select {
     font-family: 'knowledge';
+}
+
+.form-control {
+    -webkit-transition: all linear 0.5s;
+       -moz-transition: all linear 0.5s;
+            transition: all linear 0.5s;
+}
+
+input.ng-dirty.ng-invalid {
+    background-color: rgb(255, 202, 202);
+    border: 2px solid red;
 }
 
 
@@ -262,6 +276,10 @@ input, select {
     font-family: Arial;
 }
 
+    .standard-list li {
+        margin-bottom: 10px;
+    }
+
 
 
 
@@ -399,6 +417,7 @@ header[role='banner'] {
     }
         .api-panel__header {
             text-align: center;
+            font-size: 2em;
         }
 
         .api-panel__form {
@@ -483,7 +502,6 @@ header[role='banner'] {
 \*------------------------------------*/
 
 .sidebar {
-
     background: #FF8000;
 }
 

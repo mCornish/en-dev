@@ -9,6 +9,8 @@ function PanelCtrl($scope) {
         console.log('submit');
     };
 
+    self.tosError = false;
+
 }
 
 angular.module('app').controller('PanelCtrl', ['$scope', PanelCtrl]);
