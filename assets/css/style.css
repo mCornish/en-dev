@@ -49,12 +49,16 @@
 \*------------------------------------*/
 
 html {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
 body {
-    background: #BABABA url('../images/body-bg.jpg') repeat-x;
+    /* Sets body minimum height to window height so
+       that footer stays at the bottom of the page */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 
@@ -62,18 +66,24 @@ header {
     clear: both;
 }
 
+main {
+    /* Sets content area height to fill extra
+       window space if there is not enough content */
+    flex: 1;
+}
+
 h1 {
-    font: 3rem 'knowledgeBold', Arial, Helvetica, sans-serif;
+    font: 3rem 'knowledgeMedium', Arial, Helvetica, sans-serif;
     line-height: 1.48em;
 }
 
 h2 {
-    font: 2.5rem 'knowledgeLight', Arial, Helvetica, sans-serif;
+    font: 2rem 'knowledgeLight', Arial, Helvetica, sans-serif;
     line-height: 1.48em;
 }
 
 h3 {
-    font: 1.2rem 'knowledgeBold', Arial, Helvetica, sans-serif;
+    font: 1.2rem 'knowledgeMedium', Arial, Helvetica, sans-serif;
     line-height: 1.48;
 }
 
@@ -151,13 +161,73 @@ input.ng-dirty.ng-invalid {
     padding: 3em;
 }
 
+.container--side-padded {
+    padding: 3em 0;
+}
+
 
 .container--small {
     border-radius: 1em;
     padding: 2em;
 }
 
+.container--text {
+    width: 40em;
+}
 
+
+
+
+
+/*------------------------------------*\
+    #GRID
+\*------------------------------------*/
+
+.grid {
+    display: flex;
+}
+
+    .grid__cell {
+        flex: 1;
+    }
+
+
+/* With gutters */
+.grid--gutters {
+    margin-left: -2em;
+}
+
+    .grid--gutters > .grid__cell {
+        padding-left: 2em;
+    }
+
+
+/* Alignment per row */
+.grid--top {
+    align-items: flex-start;
+}
+
+.grid--bottom {
+    align-item: flex-end;
+}
+
+.grid--center {
+    align-items: center;
+}
+
+
+/* Alignment per cell */
+.grid__cell--top {
+    align-self: flex-start;
+}
+
+.grid__cell--bottom {
+    align-self: flex-end;
+}
+
+.grid__cell--center {
+    align-self: center;
+}
 
 
 
@@ -243,7 +313,7 @@ input.ng-dirty.ng-invalid {
 }
 
     .panel.active {
-        max-height: 500px;  /* This must be higher than the height
+        max-height: 1000px;  /* This must be higher than the height
                                of the panel's contents */
     }
 
@@ -255,7 +325,7 @@ input.ng-dirty.ng-invalid {
     #SEARCH
 \*------------------------------------*/
 .search {
-    width: 25em;
+    /*width: 25em;*/
 }
 
     .search__input:hover + .search__label {
@@ -324,13 +394,13 @@ input.ng-dirty.ng-invalid {
 header[role='banner'] {
     position: relative;
 
-    width: 100%;
+    min-width: 650px;
 
     border-bottom: 2px solid #FF8000;
 }
 
     .header__alpha {
-        padding: 20px 0;
+        padding: 1.5em 0;
     }
 
         .logo__alpha {
@@ -350,48 +420,44 @@ header[role='banner'] {
             }
 
         .header__search {
-            margin-top: 15px;
+
         }
 
     .header__beta {
         overflow: hidden;
-
-        height: 45px;
-
+        padding: .5em 0;
         border-top: 1px solid rgb(221, 221, 221);
     }
 
-        .header__nav > li, .header_nav > li:hover {
+        .header__nav li::after {
+            content: '';
+            display: block;
             border-bottom: 4px #FF8000 solid;
+            position: relative;
+            top: 1em;
+            transition: top .2s;
         }
 
-            .header__nav a {
-                font: 24px 'knowledgeLight' bold; /* Uses pixels so it won't scale */
-
-                display: block;
-
-                padding: 9px .4em 9px;
-
-                transition: padding 0.2s;
-
-                color: currentColor;
+            .header__nav li:hover::after, .header__nav .active::after {
+                top: .6em;
             }
 
-                .header__nav a:hover {
-                    padding: 9px .4em 4px;
+            .header__nav .active a {
+                color: #FF8000;
+            }
 
-                    transition: padding 0.2s;
-                }
+            .header__nav a {
+                /* Uses pixels to prevent scaling,
+                   which breaks the hover/active state */
+                font: 24px 'knowledgeLight' bold;
+                display: block;
+                color: currentColor;
+                padding: 0 .5em;
+            }
 
-                .header__nav .active {
-                    padding: 9px .4em 4px;
-
-                    color: #FF8000;
-                }
 
         .header__key-btn {
             font-family: 'knowledge';
-            margin: 5px 0;
             background: #FF8000;
         }
 
@@ -415,6 +481,7 @@ header[role='banner'] {
     .api-panel__container {
         background: rgba(0, 0, 0, 0.1);
     }
+
         .api-panel__header {
             text-align: center;
             font-size: 2em;
@@ -425,7 +492,7 @@ header[role='banner'] {
         }
 
             .api-panel__input {
-                margin-bottom: 15px;
+                margin-bottom: 25px;
             }
 
             .api-panel__terms {
@@ -472,12 +539,6 @@ header[role='banner'] {
 
     .api-panel__confirm {
         font: 3em 'knowledgeMedium';
-
-        width: 200px;
-        height: 13%;
-        margin: auto;
-        padding: 5em 0;
-
         text-align: center;
     }
 
@@ -502,25 +563,25 @@ header[role='banner'] {
 \*------------------------------------*/
 
 .sidebar {
-    background: #FF8000;
 }
 
     .sidebar__nav {
-        text-align: right;
     }
 
         .sidebar__nav > li {
-            font: 2em 'knowledge';
+            font: 1.5em 'knowledge';
             line-height: 1.48em;
+            margin-bottom: 5px;
         }
 
         .sidebar__nav ul li {
-            font-size: .8em;
+            font: .8em 'knowledgeLight';
             line-height: 1.2em;
+            padding-left: 2em;
         }
 
             .sidebar__nav a {
-                color: white;
+                color: black;
             }
 
                 .sidebar__nav a:hover {
@@ -528,7 +589,7 @@ header[role='banner'] {
                 }
 
                 .sidebar__nav .active {
-                    color: black;
+                    color: #ff8000;
                 }
 
 
@@ -540,11 +601,9 @@ header[role='banner'] {
 \*------------------------------------*/
 
 .browser {
-    background: #FF8000;
 }
 
     .browser__view {
-        background: white;
     }
 
 
@@ -561,8 +620,7 @@ footer[role='contentinfo'] {
     display: block;
     overflow: auto;
 
-    width: 100%;
-    padding: 4em;
+    background-color: rgb(244, 244, 244)
 }
 
     .footer a {
@@ -610,6 +668,7 @@ footer[role='contentinfo'] {
     .intro__api-cta {
         position: relative;
         top: -2.5em;
+        right: 3em;
     }
 
         .intro__api-label {
@@ -633,6 +692,7 @@ footer[role='contentinfo'] {
 
         .intro__count {
             font-family: 'secondChanceSketch';
+            color: #ff8000;
         }
 
     .intro__steps {
@@ -654,6 +714,7 @@ footer[role='contentinfo'] {
 
             .intro__step-num {
                 font-family: 'secondChanceSketch';
+                color: #ff8000;
             }
 
             .intro__cta {
@@ -736,10 +797,6 @@ footer[role='contentinfo'] {
  *------------------------------------*
 \*------------------------------------*/
 
-nav[role="navigation"], .header__search {
-    padding-left: 0; /* Removes Bootstrap column padding from header elements */
-}
-
 .form-control:focus {
     border: 1px solid #ccc;
     -webkit-box-shadow: none;
@@ -768,22 +825,56 @@ nav[role="navigation"], .header__search {
 
 /*------------------------------------*\
  *------------------------------------*
-    #HELPER CLASSES
+    #UTILITY CLASSES
  *------------------------------------*
 \*------------------------------------*/
 
-.highlight-color {
+.u-color--highlight {
     color: #ff8000 !important; /* Orange */
 }
 
-.primary-color {
+.u-color--primary {
     color: #666 !important; /* Gray */
 }
 
-.secondary-color {
+.u-color--secondary{
     color: white !important;
 }
 
-.courier {
+.u-text--code {
     font-family: courier !important;
+}
+
+
+.u-full, .u-1of2,
+.u-1of3, .u-2of3,
+.u-1of4, .u-3of4 {
+    -webkit-box-flex: 0!important;
+        -webkit-flex: none!important;
+            -ms-flex: none!important;
+                flex: none!important;
+}
+
+.u-full {
+    width: 100% !important;
+}
+
+.u-1of2 {
+    width: 50% !important;
+}
+
+.u-1of3 {
+    width: 33.3333% !important;
+}
+
+.u-2of3 {
+    width: 66.6666% !important;
+}
+
+.u-1of4 {
+    width: 25% !important;
+}
+
+.u-3of4 {
+    width: 75% !important;
 }

@@ -1,5 +1,5 @@
-function statusCtrl($scope) {
+function StatusCtrl($scope) {
 
 }
 
-angular.module('app').controller('statusCtrl', ['$scope',  statusCtrl]);
+angular.module('app').controller('StatusCtrl', ['$scope',  StatusCtrl]);

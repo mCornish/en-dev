@@ -3,9 +3,6 @@
 - Figure out way to route content pages dynamically (ui-router?).
 - API key functionality.
 - Search functionality (elasticsearch?).
-- Comment and make notes on website build and organization.
-  - BEM styles
-  - Modular organization
 - Get correct footer content (ie copy, links, logo).
 - Look for a solution to bulk-load JS files (Gulp?)
 - Separate into components

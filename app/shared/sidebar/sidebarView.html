@@ -1,12 +1,14 @@
-<nav class="sidebar container--padded col-xs-3">
-  <ul class="sidebar__nav nav nav--vertical">
-    <li ng-repeat="section in sidebar.map | hasContent">
-      <a ng-href="#/{{section.name}}" ng-class="{active: sidebar.isActive('{{section.name}}')}">{{section.name}}</a>
-      <ul>
-        <li ng-repeat="page in section.pages">
-          <a ng-href="#/{{section.name}}/{{page.name}}" ng-class="{active: sidebar.isActive('{{page.name}}')}">{{page.name}}</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
+<nav class="sidebar container--padded">
+    <div>
+        <ul class="sidebar__nav nav nav--vertical">
+            <li ng-repeat="section in sidebar.map | hasContent">
+                <a ng-href="#/{{section.name}}" ng-class="{active: sidebar.isActive('{{section.name}}')}">{{section.name}}</a>
+                <ul>
+                    <li ng-repeat="page in section.pages">
+                        <a ng-href="#/{{section.name}}/{{page.name}}" ng-class="{active: sidebar.isActive('{{page.name}}')}" ng-show="sidebar.isActive('{{section.name}}')">{{page.name}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>

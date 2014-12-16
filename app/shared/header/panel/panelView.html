@@ -1,70 +1,78 @@
 <section id="js-api-panel" ng-class="{'active' : header.panelOpen}" class="panel api-panel secondary-color row">
-  <div id="js-api-container" class="container--padded row" ng-hide="panel.submitted">
-    <div class="col-md-4">
-      <div class="api-panel__container container--small">
-        <h2 class="api-panel__header">Developer Details</h2>
-        <form class="api-panel__form" name="apiForm">
 
-            <div class="input-wrapper">
-                <input type="text" id="txtDevName" class="api-panel__input form-control" name="name" ng-model="devName" required/>
-                <label for="txtDevName" ng-hide="devName.length">Developer Name</label>
+    <div class="container container--side-padded">
+        <div id="js-api-container" class="grid grid--gutters" ng-hide="panel.submitted">
+            <div class="grid__cell">
+                <div class="api-panel__container container--small">
+                    <h2 class="api-panel__header">Developer Details</h2>
+                    <form class="api-panel__form" name="apiForm">
+
+                        <div class="input-wrapper">
+                            <input type="text" id="txtDevName" class="api-panel__input form-control" name="name" ng-model="devName" required/>
+                            <label for="txtDevName" ng-hide="devName.length">Developer Name</label>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <input type="text" id="txtEmail" class="api-panel__input form-control" ng-model="devEmail" required/>
+                            <label for="txtEmail" ng-hide="devEmail.length">Developer Email</label>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <input type="text" id="Org" class="api-panel__input form-control" ng-model="org"/>
+                            <label for="Org" ng-hide="org.length">Organization</label>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="grid__cell">
+                <div class="api-panel__container container--small">
+                    <h2 class="api-panel__header">Project Details</h2>
+                    <form class="api-panel__form">
+
+                        <div class="input-wrapper">
+                            <input type="text" id="txtAppName" class="api-panel__input form-control" ng-model="appName"/>
+                            <label for="txtAppName" ng-hide="appName.length">App Name</label>
+                        </div>
+
+                        <label for="dropServices">Allowed Services</label>
+                        <select class="api-panel__input form-control">
+                            <option>Full Access</option>
+                            <option>Read Only</option>
+                            <option>Reference API</option>
+                            <option>Formatter API</option>
+                        </select>
+
+                        <div class="input-wrapper">
+                            <input type="text" id="txtClientId" class="api-panel__input form-control" ng-model="clientID"/>
+                            <label for="txtClientId" ng-hide="clientID.length">Client ID</label>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <input type="tel" id="txtWebsite" class="api-panel__input form-control" ng-model="website"/>
+                            <label for="txtWebsite" ng-hide="website.length">Website</label>
+                        </div>
+
+                    </form>
+                </div>
             </div>
 
-            <div class="input-wrapper">
-                <input type="text" id="txtEmail" class="api-panel__input form-control" ng-model="devEmail" required/>
-                <label for="txtEmail" ng-hide="devEmail.length">Developer Email</label>
+            <div class="grid__cell">
+                <div class="api-panel__container container--small">
+                    <h2 class="api-panel__header">Submit</h2>
+                    <div class="api-panel__terms">
+                        <input class="api-panel__terms-check" type="checkbox" ng-model="tosChecked"/>
+                        <span class="api-panel__terms-text">I accept the <a href="#" class="api-panel__terms-link secondary-color">Terms of Service</a></span>
+                    </div>
+                    <button href="#" ng-click="tosChecked ? panel.submit() : panel.tosError = true" class="api-panel__submit btn btn-primary btn-large btn-block submit">Submit</button>
+                </div>
             </div>
-
-            <div class="input-wrapper">
-                <input type="text" id="Org" class="api-panel__input form-control" ng-model="org"/>
-                <label for="Org" ng-hide="org.length">Organization</label>
-            </div>
-
-        </form>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="api-panel__container container--small">
-        <h2 class="api-panel__header">Project Details</h2>
-        <form class="api-panel__form">
-
-            <div class="input-wrapper">
-                <input type="text" id="txtAppName" class="api-panel__input form-control" ng-model="appName"/>
-                <label for="txtAppName" ng-hide="appName.length">App Name</label>
-            </div>
-
-          <label for="dropServices">Allowed Services</label>
-          <select class="api-panel__input form-control">
-            <option>Full Access</option>
-            <option>Read Only</option>
-            <option>Reference API</option>
-            <option>Formatter API</option>
-          </select>
-
-            <div class="input-wrapper">
-                <input type="text" id="txtClientId" class="api-panel__input form-control" ng-model="clientID"/>
-                <label for="txtClientId" ng-hide="clientID.length">Client ID</label>
-            </div>
-
-            <div class="input-wrapper">
-                <input type="tel" id="txtWebsite" class="api-panel__input form-control" ng-model="website"/>
-                <label for="txtWebsite" ng-hide="website.length">Website</label>
-            </div>
-
-        </form>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="api-panel__container container--small">
-        <h2 class="api-panel__header">Submit</h2>
-        <div class="api-panel__terms">
-            <input class="api-panel__terms-check" type="checkbox" ng-model="tosChecked"/>
-            <span class="api-panel__terms-text">I accept the <a href="#" class="api-panel__terms-link secondary-color">Terms of Service</a></span>
         </div>
-          <button href="#" ng-click="tosChecked ? panel.submit() : panel.tosError = true" class="api-panel__submit btn btn-primary btn-large btn-block submit">Submit</button>
-      </div>
+
+        <x-loader></x-loader>
+
+        <div id="js-api-confirm" class="api-panel__confirm" ng-show="panel.submitted">Submitted</div>
+
     </div>
-  </div>
-  <x-loader></x-loader>
-  <div id="js-api-confirm" class="api-panel__confirm" ng-show="panel.submitted">Submitted</div>
+
 </section>

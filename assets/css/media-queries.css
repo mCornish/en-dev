@@ -2,7 +2,7 @@
 {
     html
     {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
@@ -12,25 +12,10 @@
     {
         font-size: 12px;
     }
-    footer {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    #stepDetails .row
-    {
-        text-align: center;
-    }
-    #stepDetails .step {
-      margin-bottom: 2em;
-    }
-    #bottom-wrap .footerLogo2 {
-      padding: 20px 0 10px;
-      width: 100%;
-    }
-    #bottom-wrap nav {
-      text-align: left;
-    }
-    #bottom-wrap ul {
-      padding: 0;
+    .api-panel__container {
+        width: 50%;
+        margin: 0 auto;
+        background: transparent;
+        padding: 0;
     }
 }

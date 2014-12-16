@@ -45,11 +45,11 @@ angular.module('app', ['ngRoute'])
     // Status
     .when('/status', {
         templateUrl: 'app/components/status/statusView.html',
-        controller: 'statusCtrl as status'})
+        controller: 'StatusCtrl as status'})
     // Sandbox
     .when('/sandbox', {
         templateUrl: 'app/components/sandbox/sandboxView.html',
-        controller: 'sandboxCtrl as sandbox'})
+        controller: 'SandboxCtrl as sandbox'})
     // Redirect
     .otherwise({
         redirectTo: '/'

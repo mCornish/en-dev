@@ -3,6 +3,7 @@ Files
 Angular
     controller as objects to avoid scope issues
     unit tests
+    https://github.com/jmcunningham/angularjs-styleguide (loosely)
 CSS
     http://cssguidelin.es/
     BEM

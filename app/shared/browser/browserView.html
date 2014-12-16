@@ -1,8 +1,10 @@
-<div class="browser container-fluid">
+<div class="browser container">
 
-  <div class="row">
-    <x-sidebar></x-sidebar> <!-- Note: Sidebar uses 3 columns -->
-    <section class="browser__view container--padded col-xs-9" ng-include="browser.getPage()">
+  <div class="grid">
+    <div class="grid__cell u-1of4">
+        <x-sidebar></x-sidebar>
+    </div>
+    <section class="browser__view container--padded container--text grid__cell" ng-include="browser.getPage()">
     </section>
   </div>
 

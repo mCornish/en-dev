@@ -1,28 +1,31 @@
-<header role="banner" class="container-fluid">
-    <div class="header__alpha row">
-        <div class="col-xs-6">
-            <a href="#/">
-                <div class="logo__alpha primary-color">THOMSON REUTERS</div>
-                <div class="logo__beta highlight-color">
-                    ENDNOTE<span class="logo__developer primary-color">Developer</span>
-                </div>
-            </a>
+<header role="banner">
+    <div class="container">
+        <div class="header__alpha grid grid--center">
+            <div class="grid__cell">
+                <a href="#/">
+                    <div class="logo__alpha u-color--primary">THOMSON REUTERS</div>
+                    <br>
+                    <div class="logo__beta u-color--highlight">
+                        ENDNOTE<span class="logo__developer u-color--primary">Developer</span>
+                    </div>
+                </a>
+            </div>
+            <div class="search header__search input-wrapper grid__cell u-1of3">
+                <input class="search__input form-control" type="search" id="Search" ng-model="header.term" />
+                <label class="search__label" for="Search" ng-hide="header.term.length">Search</label>
+            </div>
         </div>
-        <div class="search header__search input-wrapper col-xs-6 pull-right">
-            <input class="search__input form-control" type="search" id="Search" ng-model="header.term" />
-            <label class="search__label" for="Search" ng-hide="header.term.length">Search</label>
-        </div>
-    </div>
-    <div class="header__beta row">
-        <nav role="navigation" class="col-xs-10">
-            <ul class="nav header__nav">
-                <li ng-repeat="section in header.map">
-                    <a ng-class="{active: header.isActive('{{section.name}}')}" ng-href="#/{{section.name}}">{{section.name}}</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="col-xs-2">
-            <button href="#" id="key-btn" class="header__key-btn secondary-color btn pull-right" ng-click="header.panelOpen = !header.panelOpen" ng-class="{'active' : header.panelOpen}">Get an API Key</button>
+        <div class="header__beta grid grid--center">
+            <nav role="navigation" class="grid__cell u-2of3">
+                <ul class="nav header__nav">
+                    <li ng-class="{active: header.isActive('{{section.name}}')}" ng-repeat="section in header.map">
+                        <a ng-href="#/{{section.name}}">{{section.name}}</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="grid__cell">
+                <button href="#" id="key-btn" class="header__key-btn u-color--secondary btn pull-right" ng-click="header.panelOpen = !header.panelOpen" ng-class="{'active' : header.panelOpen}">Get an API Key</button>
+            </div>
         </div>
     </div>
     <x-api-panel></x-api-panel>
